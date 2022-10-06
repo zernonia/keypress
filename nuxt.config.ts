@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     cookies: {
       name: "sb",
       lifetime: 60 * 60 * 8,
-      domain: ".hydrogen-self.vercel.app",
+      domain: ".keypress.blog",
       path: "/",
       sameSite: "lax",
     },

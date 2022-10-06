@@ -5,7 +5,7 @@ const user = useSupabaseUser()
 <template>
   <div>
     <nav class="flex justify-between items-center">
-      <NuxtLink to="/">Hydrogen</NuxtLink>
+      <NuxtLink to="/">KeyPress</NuxtLink>
 
       <div>
         <NuxtLink to="/login" v-if="!user">Login</NuxtLink>
