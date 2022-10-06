@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { useEditor, EditorContent } from "@tiptap/vue-3"
-import StarterKit from "@tiptap/starter-kit"
 import Document from "@tiptap/extension-document"
 import Text from "@tiptap/extension-text"
 import Heading from "@tiptap/extension-heading"
@@ -12,7 +11,7 @@ const props = defineProps<{
 const emit = defineEmits(["update:modelValue"])
 
 const CustomDocument = Document.extend({
-  content: "heading block*",
+  content: "heading",
 })
 const editor = useEditor({
   content: props.modelValue ?? "",
@@ -32,7 +31,8 @@ const editor = useEditor({
 watch(
   () => props.modelValue,
   (newValue) => {
-    const isSame = editor.value.getHTML() === newValue
+    const title = editor.value.getJSON().content?.[0].content?.[0].text
+    const isSame = title === newValue
     if (isSame) return
 
     editor.value.commands.setContent(newValue, false)
