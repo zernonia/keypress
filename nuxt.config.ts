@@ -16,7 +16,16 @@ export default defineNuxtConfig({
     shortcuts: [],
     rules: [],
   },
+  supabase: {
+    cookies: {
+      name: "sb",
+      lifetime: 60 * 60 * 8,
+      domain: ".hydrogen-self.vercel.app",
+      path: "/",
+      sameSite: "lax",
+    },
+  },
   build: {
-    transpile: ["@tiptap/extension-link", "@tiptap/extension-placeholder"],
+    transpile: ["@tiptap/extension-link", "@tiptap/extension-placeholder", "@tiptap/extension-document"],
   },
 })
