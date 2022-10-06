@@ -3,9 +3,11 @@ const user = useSupabaseUser()
 </script>
 
 <template>
-  <div>
+  <div class="p-4 bg-light-300 min-h-screen w-full flex flex-col">
     <nav class="flex justify-between items-center">
-      <NuxtLink to="/">KeyPress</NuxtLink>
+      <NuxtLink to="/">
+        <Logo class="w-12 h-12"></Logo>
+      </NuxtLink>
 
       <div>
         <NuxtLink to="/login" v-if="!user">Login</NuxtLink>
