@@ -16,4 +16,7 @@ export default defineNuxtConfig({
     shortcuts: [],
     rules: [],
   },
+  build: {
+    transpile: ["@tiptap/extension-link", "@tiptap/extension-placeholder"],
+  },
 })
