@@ -11,7 +11,6 @@
     "@iconify-json/logos": "^1.1.14",
     "@iconify-json/ph": "^1.1.2",
     "@iconify-json/uil": "^1.1.2",
-    "@nuxt/content": "^2.0.1",
     "@nuxtjs/supabase": "^0.1.25",
     "@unocss/nuxt": "^0.45.6",
     "@unocss/preset-icons": "^0.45.6",
