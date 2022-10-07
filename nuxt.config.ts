@@ -25,6 +25,12 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: ["@tiptap/extension-link", "@tiptap/extension-placeholder", "@tiptap/extension-document"],
+    transpile: [
+      "@tiptap/extension-link",
+      "@tiptap/extension-placeholder",
+      "@tiptap/extension-document",
+      "focus-trap",
+      "@vueuse/integrations",
+    ],
   },
 })

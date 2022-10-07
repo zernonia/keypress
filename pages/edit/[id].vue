@@ -1,5 +1,7 @@
 <script lang="ts" setup>
+import { useFocusTrap } from "@vueuse/integrations/useFocusTrap"
 import slugify from "slugify"
+
 const user = useSupabaseUser()
 const client = useSupabaseClient()
 
@@ -9,7 +11,9 @@ const postId = ref(params.id)
 const title = ref("")
 const body = ref("")
 
+const isSaving = ref(false)
 const save = async () => {
+  isSaving.value = true
   const { data, error } = await client
     .from("posts")
     .upsert({
@@ -27,6 +31,7 @@ const save = async () => {
       history.pushState(null, "Title?", `${window.origin}/edit/${postId.value}`)
     }
   }
+  isSaving.value = false
 }
 
 const { ctrl_s } = useMagicKeys({
@@ -52,14 +57,19 @@ await useAsyncData(
   { server: false, lazy: true }
 )
 
+const el = ref<HTMLElement>()
+useFocusTrap(el, { immediate: true })
+
 definePageMeta({
   alias: "/write",
 })
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <button @click="save">Save</button>
+  <div ref="el" class="flex flex-col mt-8">
+    <div class="flex justify-end prose mx-auto w-full">
+      <button :disabled="isSaving" class="btn-primary" @click="save">Save</button>
+    </div>
 
     <div class="p-2 prose mx-auto w-full">
       <TiptapHeading v-model="title"></TiptapHeading>

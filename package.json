@@ -19,6 +19,7 @@
     "@unocss/reset": "^0.45.6",
     "@unocss/transformer-directives": "^0.45.6",
     "@vueuse/core": "^9.1.0",
+    "@vueuse/integrations": "^9.3.0",
     "@vueuse/nuxt": "^9.1.0",
     "nuxt": "3.0.0-rc.11"
   },
@@ -36,6 +37,8 @@
     "lowlight": "^2.7.0",
     "prosemirror-tables": "^1.2.5",
     "prosemirror-utils": "^0.9.6",
-    "slugify": "^1.6.5"
+    "slugify": "^1.6.5",
+    "focus-trap": "^7.0.0",
+    "vue-command-palette": "^0.1.3"
   }
 }

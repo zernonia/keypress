@@ -61,7 +61,7 @@ watch(
 
 <style lang="postcss">
 .ProseMirror {
-  @apply p-2;
+  @apply p-2 focus:outline-none;
 }
 
 .prose pre {
@@ -74,9 +74,9 @@ watch(
 .ProseMirror .is-empty::before {
   content: attr(data-placeholder);
   float: left;
-  color: #adb5bd;
   pointer-events: none;
   height: 0;
+  @apply text-gray-300;
 }
 
 .hljs-comment,

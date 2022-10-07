@@ -38,6 +38,9 @@ watch(
     editor.value.commands.setContent(newValue, false)
   }
 )
+watchOnce(editor, () => {
+  if (editor.value) editor.value.commands.focus()
+})
 </script>
 
 <template>
