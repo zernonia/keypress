@@ -25,12 +25,12 @@ const navAction = (path: string) => {
   isVisible.value = false
   router.push(path)
 }
-const navList = [
+const navList = computed(() => [
   { label: "Home", value: "home", action: () => navAction("/"), show: true },
   { label: "Write", value: "write", action: () => navAction("/write"), show: true },
   { label: "Login", value: "login", action: () => navAction("/login"), show: !user.value?.id },
   { label: "Dashboard", value: "dashboard", action: () => navAction("/dashboard"), show: user.value?.id },
-]
+])
 </script>
 
 <template>

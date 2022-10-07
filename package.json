@@ -11,6 +11,7 @@
     "@iconify-json/logos": "^1.1.14",
     "@iconify-json/ph": "^1.1.2",
     "@iconify-json/uil": "^1.1.2",
+    "@nuxt/image-edge": "^1.0.0-27719579.87dcdf2",
     "@nuxtjs/supabase": "^0.1.25",
     "@unocss/nuxt": "^0.45.6",
     "@unocss/preset-icons": "^0.45.6",
@@ -34,11 +35,11 @@
     "@tiptap/starter-kit": "^2.0.0-beta.199",
     "@tiptap/suggestion": "^2.0.0-beta.199",
     "@tiptap/vue-3": "^2.0.0-beta.199",
+    "focus-trap": "^7.0.0",
     "lowlight": "^2.7.0",
     "prosemirror-tables": "^1.2.5",
     "prosemirror-utils": "^0.9.6",
     "slugify": "^1.6.5",
-    "focus-trap": "^7.0.0",
     "vue-command-palette": "^0.1.3"
   }
 }
