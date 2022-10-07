@@ -47,7 +47,7 @@ const navList = computed(() => [
     <Command.Dialog :visible="isVisible" theme="raycast" @select-item="handleSelectItem">
       <template #header>
         <div command-raycast-top-shine="" />
-        <Command.Input placeholder="Search for apps and commands..." />
+        <Command.Input placeholder="Search for commands..." />
         <hr command-raycast-loader="" />
       </template>
       <template #body>
@@ -57,7 +57,7 @@ const navList = computed(() => [
           <Home />
 
           <Command.Group heading="Navigation">
-            <Command.Item @select="item.action" v-for="item in navList.filter((i) => i.show)">
+            <Command.Item @select="item.action" v-for="item in navList.filter((i) => i.show)" :data-value="item.value">
               {{ item.label }}
             </Command.Item>
           </Command.Group>
