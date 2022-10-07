@@ -2,31 +2,49 @@
 import type { Editor } from "@tiptap/core"
 import { PropType } from "vue"
 
+const user = useSupabaseUser()
+const client = useSupabaseClient()
+
 const props = defineProps({
   show: Boolean,
   editor: Object as PropType<Editor>,
 })
-const open = ref(props.show)
+const isVisible = ref(props.show)
 
 const inputEl = ref<HTMLInputElement>()
 onMounted(() => {
   inputEl.value.focus()
 })
+const { files, open: openFileDialog, reset } = useFileDialog({ accept: "image/*" })
+const { base64 } = useBase64(computed(() => files.value?.item?.(0)))
 
-const save = () => {
-  props.editor
-    .chain()
-    .focus()
-    .setImage({
-      src: "https://images.unsplash.com/photo-1664674842252-2361f75fa73b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      alt: "alt text",
-    })
-    .run()
-  open.value = false
+const isLoading = ref(false)
+const save = async () => {
+  if (!files.value?.item(0)) return
+  isLoading.value = true
+  const file = files.value.item(0)
+  const { data } = await client.storage
+    .from("posts")
+    .upload(`${user.value.id}/${file.name}`, file, { cacheControl: "3600" })
+
+  if (data.Key) {
+    const { publicURL } = client.storage.from("posts").getPublicUrl(data.Key.replace("posts/", ""))
+
+    props.editor
+      .chain()
+      .focus()
+      .setImage({
+        src: publicURL,
+        alt: "alt text",
+      })
+      .run()
+  }
+  isLoading.value = false
+  isVisible.value = false
 }
 
-watch(open, () => {
-  if (!open.value) {
+watch(isVisible, () => {
+  if (!isVisible.value) {
     const editorEl = document.querySelector(".content .ProseMirror") as HTMLDivElement
     if (editorEl) editorEl.focus()
   }
@@ -34,12 +52,16 @@ watch(open, () => {
 </script>
 
 <template>
-  <Modal v-model:open="open">
+  <Modal v-model:open="isVisible">
     <div class="flex flex-col p-4">
       <h2>Add image</h2>
 
       <div class="my-6">
-        <input ref="inputEl" accept="image/*" type="file" name="upload" id="upload" />
+        <img class="h-64 w-auto m-auto object-contain" :src="base64" v-if="base64" />
+
+        <button ref="inputEl" accept="image/*" type="button" @click="openFileDialog()" class="btn-primary">
+          Upload
+        </button>
       </div>
 
       <div>
