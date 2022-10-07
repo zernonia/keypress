@@ -15,6 +15,7 @@ const user = useSupabaseUser()
           <NuxtLink to="/login" v-if="!user">Login</NuxtLink>
           <div>
             <NuxtImg
+              v-if="user?.user_metadata?.avatar_url"
               class="w-10 h-10 rounded-full"
               :src="user?.user_metadata?.avatar_url"
               :alt="user?.user_metadata?.full_name"

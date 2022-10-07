@@ -7,11 +7,12 @@ const user = useSupabaseUser()
 const keys = useMagicKeys()
 const CmdK = keys["Meta+K"]
 const Escape = keys["Escape"]
-const isVisible = ref(false)
+const isVisible = useState("command-visible", () => false)
+
 watch(CmdK, (v) => {
   if (v) {
     isVisible.value = !isVisible.value
-    console.log("Meta + K has been pressed")
+    // console.log("Meta + K has been pressed")
     // do your own logic, maybe make dialog visible
   }
 })
@@ -28,6 +29,7 @@ const navAction = (path: string) => {
 const navList = computed(() => [
   { label: "Home", value: "home", action: () => navAction("/"), show: true },
   { label: "Write", value: "write", action: () => navAction("/write"), show: true },
+  { label: "Posts", value: "posts", action: () => navAction("/posts"), show: true },
   { label: "Login", value: "login", action: () => navAction("/login"), show: !user.value?.id },
   { label: "Dashboard", value: "dashboard", action: () => navAction("/dashboard"), show: user.value?.id },
 ])

@@ -64,70 +64,11 @@ watch(
   @apply p-2 focus:outline-none;
 }
 
-.prose pre {
-  background: #0d0d0d;
-  color: #fff;
-  font-family: "JetBrainsMono", monospace;
-  padding: 0.75rem 1rem;
-  border-radius: 0.5rem;
-}
 .ProseMirror .is-empty::before {
   content: attr(data-placeholder);
   float: left;
   pointer-events: none;
   height: 0;
   @apply text-gray-300;
-}
-
-.hljs-comment,
-.hljs-quote {
-  color: #616161;
-}
-
-.hljs-variable,
-.hljs-template-variable,
-.hljs-attribute,
-.hljs-tag,
-.hljs-name,
-.hljs-regexp,
-.hljs-link,
-.hljs-name,
-.hljs-selector-id,
-.hljs-selector-class {
-  color: #f98181;
-}
-
-.hljs-number,
-.hljs-meta,
-.hljs-built_in,
-.hljs-builtin-name,
-.hljs-literal,
-.hljs-type,
-.hljs-params {
-  color: #fbbc88;
-}
-
-.hljs-string,
-.hljs-symbol,
-.hljs-bullet {
-  color: #b9f18d;
-}
-
-.hljs-title,
-.hljs-section {
-  color: #faf594;
-}
-
-.hljs-keyword,
-.hljs-selector-tag {
-  color: #70cff8;
-}
-
-.hljs-emphasis {
-  font-style: italic;
-}
-
-.hljs-strong {
-  font-weight: 700;
 }
 </style>

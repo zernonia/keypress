@@ -57,8 +57,18 @@ await useAsyncData(
   { server: false, lazy: true }
 )
 
-const el = ref<HTMLElement>()
-useFocusTrap(el, { immediate: true })
+// todo: visit focus trap in the future
+// const el = ref<HTMLElement>()
+// const { activate, deactivate } = useFocusTrap(el )
+// const isVisible = useState("command-visible")
+
+// watch(
+//   isVisible,
+//   (n) => {
+//     n ? deactivate() : activate()
+//   },
+//   { immediate: true }
+// )
 
 definePageMeta({
   alias: "/write",
