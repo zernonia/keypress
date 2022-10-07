@@ -11,7 +11,12 @@ export default defineNuxtConfig({
     icons: true, // enabled `@unocss/preset-icons`,
     typography: true,
     transformers: [transformerDirective({ enforce: "pre" })], // enabled `@unocss/transformer-directives`,
-
+    safelist: [
+      "ic-round-format-bold",
+      "ic-round-format-underlined",
+      "ic-round-format-strikethrough",
+      "ic-round-format-italic",
+    ],
     // core options
     shortcuts: [
       {

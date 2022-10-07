@@ -41,14 +41,6 @@ watch(
     editor.value.commands.setContent(newValue, false)
   }
 )
-
-whenever(
-  editor,
-  () => {
-    editor.value?.commands.focus()
-  },
-  { immediate: true }
-)
 </script>
 
 <template>

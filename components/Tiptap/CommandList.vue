@@ -8,7 +8,7 @@
         :key="index"
         @click="selectItem(index)"
       >
-        {{ item.title }}
+        <span>{{ item.title }}</span>
         <span class="opacity-40 text-xs">{{ item.description }}</span>
       </button>
     </template>

@@ -1,6 +1,15 @@
 body {
   @apply text-dark-300 overflow-x-hidden;
 }
+::-moz-selection {
+  /* Code for Firefox */
+  @apply bg-gray-200;
+}
+
+::selection {
+  @apply bg-gray-200;
+}
+
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.3s ease-in-out;

@@ -12,7 +12,7 @@ onKeyStroke("Escape", () => emits("update:open", false))
 <template>
   <transition name="command-dialog">
     <div v-if="open" class="fixed top-0 left-0 w-screen h-screen z-100 flex items-center justify-center">
-      <div ref="el" class="inner w-full mx-4 max-w-112 bg-white rounded-xl shadow-2xl overflow-hidden">
+      <div ref="el" class="inner w-full mx-4 max-w-112 bg-white rounded-xl shadow-xl overflow-hidden">
         <slot>Content</slot>
       </div>
     </div>
