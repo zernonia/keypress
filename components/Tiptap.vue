@@ -3,6 +3,7 @@ import { useEditor, EditorContent } from "@tiptap/vue-3"
 import StarterKit from "@tiptap/starter-kit"
 import Underline from "@tiptap/extension-underline"
 import Image from "@tiptap/extension-image"
+import Focus from "@tiptap/extension-focus"
 
 import Commands from "~~/utils/tiptap/commands"
 import suggestion from "~~/utils/tiptap/suggestion"
@@ -26,6 +27,7 @@ const editor = useEditor({
     StarterKit,
     Image,
     Underline,
+    Focus,
     Upload,
     HardBreak,
     Code,
@@ -70,5 +72,19 @@ watch(
   pointer-events: none;
   height: 0;
   @apply text-gray-300;
+}
+
+@keyframes highlight {
+  0% {
+    @apply bg-light-700;
+  }
+  100% {
+    @apply bg-transparent;
+  }
+}
+
+.has-focus {
+  animation: highlight 0.75s ease-out;
+  @apply rounded;
 }
 </style>

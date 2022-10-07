@@ -12,37 +12,43 @@ export default {
   items: ({ query }) => {
     return [
       {
-        title: "H2",
+        title: "Heading 2",
+        description: "Big section heading.",
         command: ({ editor, range }: Command) => {
           editor.chain().focus().deleteRange(range).setNode("heading", { level: 2 }).run()
         },
       },
       {
-        title: "H3",
+        title: "Heading 3",
+        description: "Medium section heading.",
         command: ({ editor, range }: Command) => {
           editor.chain().focus().deleteRange(range).setNode("heading", { level: 3 }).run()
         },
       },
       {
-        title: "Ordered List",
+        title: "Numbered List",
+        description: "Create a list with numbering.",
         command: ({ editor, range }: Command) => {
           editor.chain().focus().deleteRange(range).wrapInList("orderedList").run()
         },
       },
       {
-        title: "Bullet List",
+        title: "Bulleted List",
+        description: "Create a simple bulleted list.",
         command: ({ editor, range }: Command) => {
           editor.chain().focus().deleteRange(range).wrapInList("bulletList").run()
         },
       },
       {
         title: "Image",
+        description: "Upload or embed with link.",
         command: ({ editor, range }: Command) => {
           editor.chain().focus().deleteRange(range).openModal("image").run()
         },
       },
       {
         title: "Iframe",
+        description: "Embed website with link.",
         command: ({ editor, range }: Command) => {
           editor.chain().focus().deleteRange(range).openModal("iframe").run()
         },

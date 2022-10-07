@@ -21,6 +21,17 @@ body {
   transform: scale(0);
 }
 
+.command-dialog-enter-active,
+.command-dialog-leave-active {
+  transition: all 0.2s ease-in-out;
+}
+
+.command-dialog-enter-from,
+.command-dialog-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
 .prose :where(iframe):not(:where(.not-prose, .not-prose *)) {
   width: 100%;
   max-width: 100%;

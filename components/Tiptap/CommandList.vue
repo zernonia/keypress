@@ -1,14 +1,15 @@
 <template>
-  <div class="items">
+  <div class="bg-white px-2 py-4 rounded-xl shadow-xl flex flex-col w-72">
     <template v-if="items.length">
       <button
-        class="item"
-        :class="{ 'is-selected': index === selectedIndex }"
+        class="p-2 flex flex-col text-sm text-left rounded-lg bg-transparent transition"
+        :class="{ '!bg-light-300': index === selectedIndex }"
         v-for="(item, index) in items"
         :key="index"
         @click="selectItem(index)"
       >
         {{ item.title }}
+        <span class="opacity-40 text-xs">{{ item.description }}</span>
       </button>
     </template>
     <div class="item" v-else>No result</div>
@@ -20,6 +21,7 @@ import { PropType } from "vue"
 
 interface Item {
   title: string
+  description: string
 }
 
 const props = defineProps({
@@ -64,30 +66,3 @@ defineExpose({
   onKeyDown,
 })
 </script>
-
-<style>
-.items {
-  padding: 0.2rem;
-  position: relative;
-  border-radius: 0.5rem;
-  background: #fff;
-  color: rgba(0, 0, 0, 0.8);
-  overflow: hidden;
-  font-size: 0.9rem;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0px 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.item {
-  display: block;
-  margin: 0;
-  width: 100%;
-  text-align: left;
-  background: transparent;
-  border-radius: 0.4rem;
-  border: 1px solid transparent;
-  padding: 0.2rem 0.4rem;
-}
-.is-selected {
-  border-color: #000;
-}
-</style>

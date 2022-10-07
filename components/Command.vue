@@ -83,17 +83,6 @@ const navList = computed(() => [
 </template>
 
 <style>
-.command-dialog-enter-active,
-.command-dialog-leave-active {
-  transition: all 0.2s ease-in-out;
-}
-
-.command-dialog-enter-from,
-.command-dialog-leave-to {
-  opacity: 0;
-  transform: scale(0.95);
-}
-
 div [command-dialog-mask] {
   height: 100vh;
   left: 0;

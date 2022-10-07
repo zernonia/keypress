@@ -4,6 +4,7 @@ import Document from "@tiptap/extension-document"
 import Text from "@tiptap/extension-text"
 import Heading from "@tiptap/extension-heading"
 import Placeholder from "@tiptap/extension-placeholder"
+import Focus from "@tiptap/extension-focus"
 
 const props = defineProps<{
   modelValue: string
@@ -19,10 +20,12 @@ const editor = useEditor({
     CustomDocument,
     Text,
     Heading,
+    Focus,
     Placeholder.configure({
       placeholder: "What’s the title?",
     }),
   ],
+  autofocus: true,
   onUpdate(props) {
     emit("update:modelValue", props.editor.getJSON().content?.[0].content?.[0].text)
   },

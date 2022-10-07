@@ -10,7 +10,7 @@ export default Placeholder.extend({
       placeholder: ({ node, editor }) => {
         const selection = editor.state.selection as NodeSelection
         if (selection instanceof TextSelection) {
-          return "Type '/' for commands"
+          return " Type '/' for commands"
         }
       },
       includeChildren: true,
