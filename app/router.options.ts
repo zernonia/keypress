@@ -4,7 +4,8 @@ import type { RouterOptions } from "@nuxt/schema"
 export default <RouterOptions>{
   routes: (_routes) => {
     const { ssrContext } = useNuxtApp()
-    const subdomain = useState("subdomain", () => ssrContext?.event.context.subdomain)
+    const subdomain = useSubdomain()
+    if (ssrContext?.event.context.subdomain) subdomain.value = ssrContext?.event.context.subdomain
 
     if (subdomain.value) {
       const userRoute = _routes.filter((i) => i.path.includes("/user/:siteId"))

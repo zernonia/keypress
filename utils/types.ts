@@ -4,6 +4,7 @@ export interface Profiles {
   avatar_url?: string
   name?: string
   created_at?: string
+  subdomain?: string
 }
 
 export interface Posts {
