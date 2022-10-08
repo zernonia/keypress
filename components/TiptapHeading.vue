@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useEditor, EditorContent } from "@tiptap/vue-3"
+import { useEditor, EditorContent, Extension } from "@tiptap/vue-3"
 import Document from "@tiptap/extension-document"
 import Text from "@tiptap/extension-text"
 import Heading from "@tiptap/extension-heading"
@@ -11,6 +11,24 @@ const props = defineProps<{
 }>()
 const emit = defineEmits(["update:modelValue"])
 
+const focusNextEditor = () => {
+  const editors = document.querySelectorAll(".ProseMirror")
+  let nextEditor = editors.item(1) as HTMLElement
+  if (nextEditor) {
+    nextEditor.focus()
+    return true
+  }
+}
+const Enter = Extension.create({
+  addKeyboardShortcuts() {
+    return {
+      Enter: focusNextEditor,
+      "Mod-Enter": focusNextEditor,
+      ArrowDown: focusNextEditor,
+    }
+  },
+})
+
 const CustomDocument = Document.extend({
   content: "heading",
 })
@@ -21,6 +39,7 @@ const editor = useEditor({
     Text,
     Heading,
     Focus,
+    Enter,
     Placeholder.configure({
       placeholder: "What’s the title?",
     }),
