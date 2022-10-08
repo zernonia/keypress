@@ -83,7 +83,7 @@ definePageMeta({
 
     <div class="p-2 prose mx-auto w-full">
       <TiptapHeading v-model="title"></TiptapHeading>
-      <Tiptap v-model="body"></Tiptap>
+      <Tiptap editable v-model="body"></Tiptap>
     </div>
     <div id="modal"></div>
   </div>

@@ -17,6 +17,7 @@ import Move from "~~/utils/tiptap/move"
 
 const props = defineProps<{
   modelValue: string
+  editable?: boolean
 }>()
 const emit = defineEmits(["update:modelValue"])
 
@@ -38,6 +39,7 @@ const editor = useEditor({
       suggestion,
     }),
   ],
+  editable: props.editable ?? false,
   onUpdate(props) {
     emit("update:modelValue", props.editor.getHTML())
   },

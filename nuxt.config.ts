@@ -9,7 +9,20 @@ export default defineNuxtConfig({
     // presets
     uno: true, // enabled `@unocss/preset-uno`
     icons: true, // enabled `@unocss/preset-icons`,
-    typography: true,
+    typography: {
+      cssExtend: {
+        h1: {
+          "font-weight": 700,
+        },
+        img: {
+          "border-radius": "1.5rem",
+        },
+        pre: {
+          "border-radius": "1.5rem",
+          background: "white !important",
+        },
+      },
+    },
     transformers: [transformerDirective({ enforce: "pre" })], // enabled `@unocss/transformer-directives`,
     safelist: [
       "ic-round-format-bold",
