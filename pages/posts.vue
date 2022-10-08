@@ -17,6 +17,8 @@ const constructUrl = (name: string, slug: string) => {
   if (process.dev) return `http://${name}.localhost:3000/${slug}`
   else return `https://${name}.keypress.blog/${slug}`
 }
+
+useCustomHead("Explore all posts")
 </script>
 
 <template>

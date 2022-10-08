@@ -17,6 +17,8 @@ const { data, pending } = useAsyncData("posts", async () => {
 
   return data
 })
+
+useCustomHead(computed(() => `${profile.value.name}'s blog'`))
 </script>
 
 <template>

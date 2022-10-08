@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { format } from "date-fns"
 import { Posts } from "~~/utils/types"
+import { stripHtml } from "string-strip-html"
 
 const client = useSupabaseClient()
 const { params } = useRoute()
@@ -13,6 +14,12 @@ const { data, pending } = useAsyncData(`posts-${params.slug}`, async () => {
     .single()
   return data
 })
+
+useCustomHead(
+  computed(() => data.value?.title),
+  computed(() => stripHtml(data.value?.body)?.result?.slice(0, 160)),
+  computed(() => data.value?.cover_img)
+)
 </script>
 
 <template>

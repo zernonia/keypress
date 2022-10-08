@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+useCustomHead("Dashboard")
+</script>
 
 <template>
   <div>

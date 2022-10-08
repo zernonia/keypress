@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+useCustomHead("Experience keyboard-first blogging platform")
+</script>
 
 <template>
   <div>

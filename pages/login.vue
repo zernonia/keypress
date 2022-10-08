@@ -4,6 +4,8 @@ const client = useSupabaseClient()
 const signIn = async () => {
   const { user } = await client.auth.signIn({ provider: "github" })
 }
+
+useCustomHead("Login")
 </script>
 
 <template>

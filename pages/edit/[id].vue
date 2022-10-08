@@ -70,6 +70,7 @@ await useAsyncData(
 //   { immediate: true }
 // )
 
+useCustomHead("Write your post")
 definePageMeta({
   alias: "/write",
 })
