@@ -2,8 +2,8 @@
 const client = useSupabaseClient()
 const { params } = useRoute()
 
-const { data, pending } = useAsyncData(`posts-${params.postId}`, async () => {
-  const { data } = await client.from("posts").select("*, profiles(avatar_url, name)").eq("slug", params.postId).single()
+const { data, pending } = useAsyncData(`posts-${params.slug}`, async () => {
+  const { data } = await client.from("posts").select("*, profiles(avatar_url, name)").eq("slug", params.slug).single()
   return data
 })
 </script>
