@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 body {
   @apply text-dark-300 overflow-x-hidden;
 }

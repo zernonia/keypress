@@ -37,11 +37,13 @@
     "@tiptap/starter-kit": "^2.0.0-beta.199",
     "@tiptap/suggestion": "^2.0.0-beta.199",
     "@tiptap/vue-3": "^2.0.0-beta.199",
+    "date-fns": "^2.29.3",
     "focus-trap": "^7.0.0",
     "lowlight": "^2.7.0",
     "prosemirror-tables": "^1.2.5",
     "prosemirror-utils": "^0.9.6",
     "slugify": "^1.6.5",
+    "string-strip-html": "^11.6.10",
     "vue-command-palette": "^0.1.3"
   }
 }
