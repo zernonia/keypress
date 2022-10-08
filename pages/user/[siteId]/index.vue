@@ -4,8 +4,8 @@ import { stripHtml } from "string-strip-html"
 import { format } from "date-fns"
 
 const client = useSupabaseClient()
-const { params } = useRoute()
 const subdomain = useSubdomain()
+const profile = useProfile()
 
 const { data, pending } = useAsyncData("posts", async () => {
   const { data, error } = await client
@@ -17,16 +17,11 @@ const { data, pending } = useAsyncData("posts", async () => {
 
   return data
 })
-
-const constructUrl = (name: string, slug: string) => {
-  if (process.dev) return `http://${name}.localhost:3000/${slug}`
-  else return `https://${name}.keypress.blog/${slug}`
-}
 </script>
 
 <template>
   <div class="my-20">
-    <h1 class="text-4xl font-semibold">Posts</h1>
+    <h1 class="text-4xl font-semibold capitalize">{{ profile?.name }}'s Posts</h1>
     <div>
       <ul>
         <li class="my-4" v-for="post in data">

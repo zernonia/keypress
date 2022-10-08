@@ -3,6 +3,7 @@ import { Command } from "vue-command-palette"
 
 const router = useRouter()
 const user = useSupabaseUser()
+const subdomain = useSubdomain()
 
 const keys = useMagicKeys()
 const CmdK = keys["Meta+K"]
@@ -26,13 +27,25 @@ const navAction = (path: string) => {
   isVisible.value = false
   router.push(path)
 }
-const navList = computed(() => [
-  { label: "Home", value: "home", action: () => navAction("/"), show: true },
-  { label: "Write", value: "write", action: () => navAction("/write"), show: true },
-  { label: "Posts", value: "posts", action: () => navAction("/posts"), show: true },
-  { label: "Login", value: "login", action: () => navAction("/login"), show: !user.value?.id },
-  { label: "Dashboard", value: "dashboard", action: () => navAction("/dashboard"), show: user.value?.id },
-])
+const navList = computed(() =>
+  subdomain.value
+    ? [
+        { label: "Home", value: "home", action: () => navAction("/"), show: true },
+        {
+          label: "Keypress",
+          value: "keypress",
+          action: () => (window.location.href = "https://keypress.blog"),
+          show: true,
+        },
+      ]
+    : [
+        { label: "Home", value: "home", action: () => navAction("/"), show: true },
+        { label: "Write", value: "write", action: () => navAction("/write"), show: true },
+        { label: "Posts", value: "posts", action: () => navAction("/posts"), show: true },
+        { label: "Login", value: "login", action: () => navAction("/login"), show: !user.value?.id },
+        { label: "Dashboard", value: "dashboard", action: () => navAction("/dashboard"), show: user.value?.id },
+      ]
+)
 </script>
 
 <template>
