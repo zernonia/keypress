@@ -67,7 +67,6 @@ const navList = computed(() =>
         <!-- <Command.Loading> Hang on... </Command.Loading> -->
         <Command.List ref="dialogRef">
           <Command.Empty>No results found.</Command.Empty>
-          <Home />
 
           <Command.Group heading="Navigation">
             <Command.Item @select="item.action" v-for="item in navList.filter((i) => i.show)" :data-value="item.value">

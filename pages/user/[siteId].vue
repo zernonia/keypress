@@ -16,6 +16,10 @@ useAsyncData("profile", async () => {
   profile.value = data
   return data
 })
+
+definePageMeta({
+  layout: "user",
+})
 </script>
 
 <template>
