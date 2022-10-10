@@ -7,6 +7,7 @@ export interface Profiles {
   created_at?: string
   subdomain?: string
   domains: Domains[]
+  posts: Posts[]
 }
 
 export interface Domains {

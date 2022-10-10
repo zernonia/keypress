@@ -1,24 +1,32 @@
 <script lang="ts" setup>
 import { stripHtml } from "string-strip-html"
 import slugify from "slugify"
+import { Posts } from "~~/utils/types"
 
 const user = useSupabaseUser()
 const client = useSupabaseClient()
 
-const { params, path } = useRoute()
+const { params } = useRoute()
 const postId = ref(params.id)
 
-const title = ref("")
-const body = ref("")
+const title = postId.value ? ref("") : useLocalStorage("new-post-title", "")
+const body = postId.value ? ref("") : useLocalStorage("new-post-body", "")
 
 const isSaving = ref(false)
+const isLoginVisible = ref(false)
 const save = async () => {
   if (!title.value || !stripHtml(body.value).result) return
+  if (!user.value?.id) {
+    // login modal
+    isLoginVisible.value = true
+    return
+  }
+
   isSaving.value = true
   const { data, error } = await client
-    .from("posts")
+    .from<Posts>("posts")
     .upsert({
-      id: postId.value,
+      id: postId.value?.toString(),
       slug: slugify(title.value),
       title: title.value,
       body: body.value,
@@ -29,7 +37,11 @@ const save = async () => {
   if (data) {
     if (!postId.value) {
       postId.value = data.id
-      history.pushState(null, "Title?", `${window.origin}/edit/${postId.value}`)
+      // history.pushState(null, "Title?", `${window.origin}/edit/${postId.value}`)
+
+      localStorage.removeItem("new-post-title")
+      localStorage.removeItem("new-post-body")
+      navigateTo(`/edit/${postId.value}`)
     }
   }
   isSaving.value = false
@@ -101,6 +113,7 @@ definePageMeta({
 
       <DrawerEditPost v-model:show="isDrawerOpen"></DrawerEditPost>
       <div id="modal"></div>
+      <ModalLogin v-model:show="isLoginVisible"></ModalLogin>
     </div>
   </div>
 </template>
