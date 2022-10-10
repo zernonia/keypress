@@ -9,20 +9,18 @@ const props = defineProps({
   post: Object as PropType<Posts>,
 })
 
-const constructUrl = (name: string, slug: string) => {
-  // todo: map other custom domain
-  if (props.subdomain) return `/${slug}`
-  if (process.dev) return `http://${name}.localhost:3000/${slug}`
-  else return `https://${name}.keypress.blog/${slug}`
-}
+const url = computed(() => {
+  if (props.subdomain) return `/${props.post.slug}`
+  if (process.dev) return `http://${props.post.profiles.username}.localhost:3000/${props.post.slug}`
+  else {
+    if (props.post.profiles.subdomain) return `https://${props.post.profiles.subdomain}/${props.post.slug}`
+    else return `https://${props.post.profiles.username}.keypress.blog/${props.post.slug}`
+  }
+})
 </script>
 
 <template>
-  <NuxtLink
-    class="focus:outline-none group"
-    :target="subdomain ? '' : '_blank'"
-    :to="constructUrl(post.profiles?.name, post.slug)"
-  >
+  <NuxtLink class="focus:outline-none group" :target="subdomain ? '' : '_blank'" :to="url">
     <div
       class="p-6 my-4 bg-white shadow-none group-focus:shadow-xl group-focus:shadow-xl shadow-gray-200 rounded-3xl transition-all flex"
     >
