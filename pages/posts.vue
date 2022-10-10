@@ -24,7 +24,7 @@ useCustomHead("Explore all posts")
 </script>
 
 <template>
-  <div class="my-20">
+  <div class="my-12">
     <h1 class="text-4xl font-semibold">Posts</h1>
     <div class="flex">
       <div class="w-full">

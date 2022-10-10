@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
 
     const valid = data?.configuredBy ? true : false
 
-    return valid
+    return { valid }
   } catch (err) {
     return createError({ statusCode: 404, statusMessage: err })
   }
