@@ -21,6 +21,10 @@ const { pending } = useAsyncData(
 )
 
 useCustomHead("Dashboard")
+
+definePageMeta({
+  middleware: "auth",
+})
 </script>
 
 <template>
