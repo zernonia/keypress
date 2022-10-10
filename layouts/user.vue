@@ -12,7 +12,7 @@ const user = useSupabaseUser()
 
         <div class="flex items-center">
           <Command class="mr-4"></Command>
-          <NuxtLink rel="noopener" :to="`http://localhost:3000/login`" v-if="!user">Login</NuxtLink>
+          <NuxtLink rel="noopener" :to="`https://keypress.blog/login`" v-if="!user">Login</NuxtLink>
           <div>
             <NuxtImg
               v-if="user?.user_metadata?.avatar_url"

@@ -32,7 +32,7 @@ const navList = computed(() =>
     ? [
         { label: "Home", value: "home", action: () => navAction("/"), show: true },
         {
-          label: "Keypress",
+          label: "KeyPress",
           value: "keypress",
           action: () => (window.location.href = "https://keypress.blog"),
           show: true,
