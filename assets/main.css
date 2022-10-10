@@ -60,6 +60,17 @@ kbd:first-of-type {
   transform: scale(0);
 }
 
+.slide-in-right-enter-active,
+.slide-in-right-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+
+.slide-in-right-enter-from,
+.slide-in-right-leave-to {
+  opacity: 0;
+  transform: translateX(300px);
+}
+
 .command-dialog-enter-active,
 .command-dialog-leave-active {
   transition: all 0.2s ease-in-out;

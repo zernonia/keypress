@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useFocusTrap } from "@vueuse/integrations/useFocusTrap"
+import { stripHtml } from "string-strip-html"
 import slugify from "slugify"
 
 const user = useSupabaseUser()
@@ -13,6 +13,7 @@ const body = ref("")
 
 const isSaving = ref(false)
 const save = async () => {
+  if (!title.value || !stripHtml(body.value).result) return
   isSaving.value = true
   const { data, error } = await client
     .from("posts")
@@ -34,12 +35,16 @@ const save = async () => {
   isSaving.value = false
 }
 
-const { ctrl_s } = useMagicKeys({
+useMagicKeys({
   passive: false,
   onEventFired(e) {
     if ((e.ctrlKey || e.metaKey) && e.key === "s" && e.type === "keydown") {
       e.preventDefault()
       save()
+    }
+
+    if ((e.ctrlKey || e.metaKey) && e.key === "e" && e.type === "keydown") {
+      isDrawerOpen.value = !isDrawerOpen.value
     }
   },
 })
@@ -70,6 +75,8 @@ await useAsyncData(
 //   { immediate: true }
 // )
 
+const isDrawerOpen = ref(false)
+
 useCustomHead("Write your post")
 definePageMeta({
   alias: "/write",
@@ -79,13 +86,18 @@ definePageMeta({
 <template>
   <div ref="el" class="flex flex-col mt-8">
     <div class="flex justify-end prose mx-auto w-full">
-      <button :disabled="isSaving" class="btn-primary" @click="save">Save</button>
+      <button :disabled="isSaving" class="btn font-semibold text-gray-300 mr-6" @click="isDrawerOpen = true">
+        Edit <span class="ml-2">⌘E</span>
+      </button>
+      <button :disabled="isSaving" class="btn-primary" @click="save">Save <span class="ml-2">⌘S</span></button>
     </div>
 
     <div class="p-2 prose mx-auto w-full">
       <TiptapHeading v-model="title"></TiptapHeading>
       <Tiptap editable v-model="body"></Tiptap>
     </div>
+
+    <DrawerEditPost v-model:show="isDrawerOpen"></DrawerEditPost>
     <div id="modal"></div>
   </div>
 </template>

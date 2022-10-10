@@ -57,12 +57,8 @@ const navList = computed(() =>
 
 <template>
   <div>
-    <button
-      class="px-4 py-1 rounded-lg flex items-center text-gray-300 bg-transparent hover:bg-gray-100 focus:bg-gray-100 transition"
-      @click="isVisible = true"
-    >
-      <kbd>⌘</kbd>
-      <kbd>K</kbd>
+    <button class="btn font-semibold" @click="isVisible = true">
+      <kbd>⌘K</kbd>
     </button>
     <Command.Dialog :visible="isVisible" theme="raycast" @select-item="handleSelectItem">
       <template #header>

@@ -8,11 +8,6 @@ const props = defineProps({
 })
 const open = ref(props.show)
 
-const inputEl = ref<HTMLInputElement>()
-onMounted(() => {
-  inputEl.value.focus()
-})
-
 const save = () => {
   props.editor
     .chain()
@@ -39,7 +34,7 @@ watch(open, () => {
 
       <div>
         <label for="url">Source url</label>
-        <input ref="inputEl" type="url" name="url" id="alt-name" />
+        <input type="url" name="url" id="alt-name" />
       </div>
 
       <div>

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { Posts } from "~~/utils/types"
-import { stripHtml } from "string-strip-html"
-import { format } from "date-fns"
 
 const client = useSupabaseClient()
 const subdomain = useSubdomain()

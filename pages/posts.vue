@@ -27,7 +27,7 @@ useCustomHead("Explore all posts")
   <div class="my-20">
     <h1 class="text-4xl font-semibold">Posts</h1>
     <div class="flex">
-      <div>
+      <div class="w-full">
         <div v-if="pending">
           <Loader></Loader>
         </div>

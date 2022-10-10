@@ -11,10 +11,6 @@ const props = defineProps({
 })
 const isVisible = ref(props.show)
 
-const inputEl = ref<HTMLInputElement>()
-onMounted(() => {
-  inputEl.value.focus()
-})
 const { files, open: openFileDialog, reset } = useFileDialog({ accept: "image/*" })
 const { base64 } = useBase64(computed(() => files.value?.item?.(0)))
 
@@ -59,9 +55,7 @@ watch(isVisible, () => {
       <div class="my-6">
         <img class="h-64 w-auto m-auto object-contain" :src="base64" v-if="base64" />
 
-        <button ref="inputEl" accept="image/*" type="button" @click="openFileDialog()" class="btn-primary">
-          Upload
-        </button>
+        <button accept="image/*" type="button" @click="openFileDialog()" class="btn-primary">Upload</button>
       </div>
 
       <div>
