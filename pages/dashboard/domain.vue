@@ -1,28 +1,33 @@
 <script setup lang="ts">
 const profile = useProfile()
 
-const payload = ref(profile)
+const payload = ref({ subdomain: profile.value.subdomain })
 const isSaving = ref(false)
 const { save } = useProfileSave(payload)
 const saveDomain = async () => {
   // validate here
-  isSaving.value = true
-  await save()
+  try {
+    isSaving.value = true
 
-  // after save, add and check domain
-  const data = await $fetch("/api/add-domain", {
-    method: "POST",
-    body: {
-      domain: payload.value.subdomain,
-    },
-  })
-  console.log(data)
-  await checkDomain()
-  isSaving.value = false
+    // add domain and check first
+    const data = await $fetch("/api/add-domain", {
+      method: "POST",
+      body: {
+        domain: payload.value.subdomain,
+      },
+    })
+    console.log(data)
+
+    await Promise.all([save(), checkDomain()])
+  } catch (err) {
+    console.log(err)
+  } finally {
+    isSaving.value = false
+  }
 }
 
 const isCheckingDomain = ref(false)
-const isValid = ref(true)
+const isValid = ref(false)
 const checkDomain = async () => {
   isCheckingDomain.value = true
   const { valid } = await $fetch("/api/check-domain", {
@@ -34,6 +39,17 @@ const checkDomain = async () => {
   isValid.value = valid
   isCheckingDomain.value = false
 }
+
+onMounted(() => {
+  const url = profile.value.domains.find((i) => i.url === profile.value.subdomain)
+  if (url.active) {
+    isValid.value = true
+  } else if (!payload.value.subdomain) {
+    isValid.value = false
+  } else {
+    checkDomain()
+  }
+})
 </script>
 
 <template>
@@ -45,18 +61,25 @@ const checkDomain = async () => {
     </div>
 
     <div class="flex items-center">
-      <label for="" class="flex-shrink-0 mr-2">Domain :</label>
-      <input type="text" name="" id="" v-model="payload.subdomain" />
+      <label for="domain" class="flex-shrink-0 mr-2">Domain :</label>
+      <input
+        type="text"
+        name="domain"
+        id="domain"
+        class="bg-white"
+        v-model="payload.subdomain"
+        placeholder="https://foo.bar.com"
+      />
     </div>
 
-    <div v-if="!isValid">
+    <div v-if="!isValid && payload.subdomain">
       <Button :loading="isCheckingDomain" class="btn-plain mt-12" @click="checkDomain">Check domain</Button>
 
       <div class="mt-4 bg-white p-6 rounded-2xl">
         <p>Set the following record on your DNS provider to continue:</p>
 
         <div class="mt-6 flex items-center space-x-6">
-          <div class="flex-shrink-0">
+          <div class="flex-shrink-0 justify-start">
             <p>Type</p>
             <p>CNAME</p>
           </div>

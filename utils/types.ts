@@ -1,3 +1,4 @@
+// generated from https://supabase-schema.vercel.app/
 export interface Profiles {
   id: string /* primary key */
   username?: string
@@ -5,6 +6,15 @@ export interface Profiles {
   name?: string
   created_at?: string
   subdomain?: string
+  domains: Domains[]
+}
+
+export interface Domains {
+  user_id?: string /* foreign key to profiles.id */
+  url: string /* primary key */
+  active?: boolean
+  created_at?: string
+  profiles?: Profiles
 }
 
 export interface Posts {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const profile = useProfile()
 
-const payload = ref(profile.value)
+const payload = ref({ name: profile.value.name })
 const { save, isSaving } = useProfileSave(payload)
 
 const saveProfile = async () => {
@@ -19,8 +19,8 @@ const saveProfile = async () => {
     </div>
 
     <div class="flex items-center">
-      <label for="" class="flex-shrink-0 mr-2">Name :</label>
-      <input type="text" name="" id="" v-model="payload.name" />
+      <label for="name" class="flex-shrink-0 mr-2">Name :</label>
+      <input type="text" name="name" id="name" class="bg-white" v-model="payload.name" />
     </div>
   </div>
 </template>

@@ -5,12 +5,20 @@ const user = useSupabaseUser()
 const client = useSupabaseClient()
 const profile = useProfile()
 
-const { pending } = useAsyncData("profile", async () => {
-  const { data } = await client.from<Profiles>("profiles").select("*").eq("id", user.value?.id).maybeSingle()
+const { pending } = useAsyncData(
+  "profile",
+  async () => {
+    const { data } = await client
+      .from<Profiles>("profiles")
+      .select("*, domains(*)")
+      .eq("id", user.value?.id)
+      .maybeSingle()
 
-  profile.value = data
-  return data
-})
+    profile.value = data
+    return data
+  },
+  { server: false }
+)
 
 useCustomHead("Dashboard")
 </script>
