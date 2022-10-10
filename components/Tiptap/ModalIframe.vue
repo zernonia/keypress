@@ -8,12 +8,15 @@ const props = defineProps({
 })
 const open = ref(props.show)
 
+const url = ref("")
 const save = () => {
+  if (!url.value?.match(/[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi)) return
+
   props.editor
     .chain()
     .focus()
     .setIframe({
-      src: "https://supabase-schema.vercel.app/",
+      src: url.value,
     })
     .run()
   open.value = false
@@ -29,16 +32,17 @@ watch(open, () => {
 
 <template>
   <Modal v-model:open="open">
-    <div class="flex flex-col p-4">
-      <h2>Add iframe</h2>
+    <div class="flex flex-col p-6">
+      <h2 class="text-3xl font-bold">Add iframe</h2>
 
-      <div>
-        <label for="url">Source url</label>
-        <input type="url" name="url" id="alt-name" />
+      <div class="flex items-center my-6">
+        <label for="url" class="mr-4 flex-shrink-0">URL :</label>
+        <input type="url" name="url" id="url" placeholder="https://supabase.com" v-model="url" />
       </div>
 
-      <div>
-        <button @click="save">Save</button>
+      <div class="flex justify-end">
+        <button class="btn-plain" @click="open = false">Cancel</button>
+        <Button class="btn-primary ml-2" @click="save">Save</Button>
       </div>
     </div>
   </Modal>

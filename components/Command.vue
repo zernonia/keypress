@@ -57,14 +57,12 @@ const navList = computed(() =>
 
 <template>
   <div>
-    <button class="btn font-semibold" @click="isVisible = true">
-      <kbd>⌘K</kbd>
-    </button>
-    <Command.Dialog :visible="isVisible" theme="raycast" @select-item="handleSelectItem">
+    <button class="btn-plain" @click="isVisible = true">⌘K</button>
+    <Command.Dialog :visible="isVisible" theme="kbar" @select-item="handleSelectItem">
       <template #header>
-        <div command-raycast-top-shine="" />
+        <div command-kbar-top-shine="" />
         <Command.Input placeholder="Search for commands..." />
-        <hr command-raycast-loader="" />
+        <hr command-kbar-loader="" />
       </template>
       <template #body>
         <!-- <Command.Loading> Hang on... </Command.Loading> -->
@@ -81,13 +79,13 @@ const navList = computed(() =>
         </Command.List>
       </template>
       <template #footer>
-        <!-- <button command-raycast-open-trigger="">
+        <!-- <button command-kbar-open-trigger="">
           Open Application
           <kbd>↵</kbd>
         </button> -->
 
         <hr />
-        <button command-raycast-subcommand-trigger="">
+        <button command-kbar-subcommand-trigger="">
           Actions
           <kbd>⌘</kbd>
           <kbd>K</kbd>
@@ -98,7 +96,7 @@ const navList = computed(() =>
 </template>
 
 <style>
-div [command-dialog-mask] {
+.kbar {
   height: 100vh;
   left: 0;
   position: fixed;
@@ -107,7 +105,7 @@ div [command-dialog-mask] {
   z-index: 200;
 }
 
-.raycast [command-dialog-wrapper] {
+.kbar [command-dialog-wrapper] {
   margin: 20vh auto auto;
   width: 100%;
   border-radius: 12px;
@@ -115,7 +113,7 @@ div [command-dialog-mask] {
   @apply bg-white shadow-lg relative max-w-screen-sm;
 }
 
-.raycast [command-input] {
+.kbar [command-input] {
   border: none;
   width: 100%;
   font-size: 15px;
@@ -123,11 +121,12 @@ div [command-dialog-mask] {
   outline: none;
   background: var(--bg);
   color: var(--gray12);
+  @apply focus-within:!ring-transparent;
 }
-.raycast [command-input]::placeholder {
+.kbar [command-input]::placeholder {
   @apply text-gray-400;
 }
-.raycast [command-raycast-loader] {
+.kbar [command-kbar-loader] {
   --loader-color: var(--gray9);
   border: 0;
   width: 100%;
@@ -141,7 +140,7 @@ div [command-dialog-mask] {
   margin-top: 12px;
   margin-bottom: 12px;
 }
-.raycast [command-raycast-loader]:after {
+.kbar [command-kbar-loader]:after {
   content: "";
   width: 50%;
   height: 1px;
@@ -154,7 +153,7 @@ div [command-dialog-mask] {
   animation-timing-function: ease;
   animation-name: loading;
 }
-.raycast [command-item] {
+.kbar [command-item] {
   content-visibility: auto;
   cursor: pointer;
   height: 40px;
@@ -169,33 +168,33 @@ div [command-dialog-mask] {
 
   @apply bg-white hover:bg-light-300 transition;
 }
-.raycast [command-item][aria-selected="true"] {
+.kbar [command-item][aria-selected="true"] {
   @apply bg-light-300;
 }
-.raycast [command-item][aria-disabled="true"] {
+.kbar [command-item][aria-disabled="true"] {
   color: var(--gray8);
   cursor: not-allowed;
 }
-.raycast [command-item]:active {
+.kbar [command-item]:active {
   transition-property: background;
   background: var(--gray4);
 }
-.raycast [command-item]:first-child {
+.kbar [command-item]:first-child {
   margin-top: 8px;
 }
-.raycast [command-item] + [command-item] {
+.kbar [command-item] + [command-item] {
   margin-top: 4px;
 }
-.raycast [command-item] svg {
+.kbar [command-item] svg {
   width: 18px;
   height: 18px;
 }
-.raycast [command-raycast-meta] {
+.kbar [command-kbar-meta] {
   margin-left: auto;
   color: var(--gray11);
   font-size: 13px;
 }
-.raycast [command-list] {
+.kbar [command-list] {
   padding: 0 8px;
   height: var(--cmd-list-height);
   overflow: auto;
@@ -205,8 +204,8 @@ div [command-dialog-mask] {
   transition-property: height;
   padding-bottom: 40px;
 }
-.raycast [command-raycast-open-trigger],
-.raycast [command-raycast-subcommand-trigger] {
+.kbar [command-kbar-open-trigger],
+.kbar [command-kbar-subcommand-trigger] {
   color: var(--gray11);
   padding: 0px 4px 0px 8px;
   border-radius: 6px;
@@ -215,8 +214,8 @@ div [command-dialog-mask] {
   height: 28px;
   letter-spacing: -0.25px;
 }
-.raycast [command-raycast-clipboard-icon],
-.raycast [command-raycast-hammer-icon] {
+.kbar [command-kbar-clipboard-icon],
+.kbar [command-kbar-hammer-icon] {
   width: 20px;
   height: 20px;
   border-radius: 6px;
@@ -225,57 +224,57 @@ div [command-dialog-mask] {
   justify-content: center;
   color: #fff;
 }
-.raycast [command-raycast-clipboard-icon] svg,
-.raycast [command-raycast-hammer-icon] svg {
+.kbar [command-kbar-clipboard-icon] svg,
+.kbar [command-kbar-hammer-icon] svg {
   width: 14px;
   height: 14px;
 }
-.raycast [command-raycast-clipboard-icon] {
+.kbar [command-kbar-clipboard-icon] {
   background: linear-gradient(to bottom, #f55354, #eb4646);
 }
-.raycast [command-raycast-hammer-icon] {
+.kbar [command-kbar-hammer-icon] {
   background: linear-gradient(to bottom, #6cb9a3, #2c6459);
 }
-.raycast [command-raycast-open-trigger] {
+.kbar [command-kbar-open-trigger] {
   display: flex;
   align-items: center;
   color: var(--gray12);
 }
-.raycast [command-raycast-subcommand-trigger] {
+.kbar [command-kbar-subcommand-trigger] {
   display: flex;
   align-items: center;
   gap: 4px;
   right: 8px;
   bottom: 8px;
 }
-.raycast [command-raycast-subcommand-trigger] svg {
+.kbar [command-kbar-subcommand-trigger] svg {
   width: 14px;
   height: 14px;
 }
-.raycast [command-raycast-subcommand-trigger] hr {
+.kbar [command-kbar-subcommand-trigger] hr {
   height: 100%;
   background: var(--gray6);
   border: 0;
   width: 1px;
 }
-.raycast [command-raycast-subcommand-trigger][aria-expanded="true"],
-.raycast [command-raycast-subcommand-trigger]:hover {
+.kbar [command-kbar-subcommand-trigger][aria-expanded="true"],
+.kbar [command-kbar-subcommand-trigger]:hover {
   background: var(--gray4);
 }
-.raycast [command-raycast-subcommand-trigger][aria-expanded="true"] kbd,
-.raycast [command-raycast-subcommand-trigger]:hover kbd {
+.kbar [command-kbar-subcommand-trigger][aria-expanded="true"] kbd,
+.kbar [command-kbar-subcommand-trigger]:hover kbd {
   background: var(--gray7);
 }
-.raycast [command-separator] {
+.kbar [command-separator] {
   height: 1px;
   width: 100%;
   margin: 4px 0;
   @apply bg-gray-100;
 }
-.raycast * + [command-group] {
+.kbar * + [command-group] {
   margin-top: 8px;
 }
-.raycast [command-group-heading] {
+.kbar [command-group-heading] {
   user-select: none;
   font-size: 12px;
   color: var(--gray11);
@@ -283,7 +282,7 @@ div [command-dialog-mask] {
   display: flex;
   align-items: center;
 }
-.raycast [command-dialog-footer] {
+.kbar [command-dialog-footer] {
   display: flex;
   flex-direction: row;
   height: 40px;
@@ -296,13 +295,13 @@ div [command-dialog-mask] {
   border-top: 1px solid var(--gray6);
   border-radius: 0 0 12px 12px;
 }
-.raycast [command-dialog-footer] svg {
+.kbar [command-dialog-footer] svg {
   width: 20px;
   height: 20px;
   filter: grayscale(1);
   margin-right: auto;
 }
-.raycast [command-dialog-footer] hr {
+.kbar [command-dialog-footer] hr {
   height: 12px;
   width: 1px;
   border: 0;
@@ -310,26 +309,26 @@ div [command-dialog-mask] {
   margin: 0 4px 0px 12px;
 }
 @media (prefers-color-scheme: dark) {
-  .raycast [command-dialog-footer] {
+  .kbar [command-dialog-footer] {
     background: var(--gray2);
   }
 }
-.raycast [command-popover] {
+.kbar [command-popover] {
   z-index: var(--layer-portal);
   position: fixed;
   left: 50%;
   top: var(--page-top);
   transform: translateX(-50%);
 }
-.raycast [command-popover] [command] {
+.kbar [command-popover] [command] {
   width: 640px;
   transform-origin: center center;
   animation: dialogIn var(--transition-fast) forwards;
 }
-.raycast [command-popover][data-state="closed"] [command] {
+.kbar [command-popover][data-state="closed"] [command] {
   animation: dialogOut var(--transition-fast) forwards;
 }
-.raycast [command-empty] {
+.kbar [command-empty] {
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -368,13 +367,13 @@ div [command-dialog-mask] {
     opacity: 1;
   }
 }
-.raycast-submenu {
+.kbar-submenu {
   animation-duration: 0.2s;
   animation-timing-function: ease;
   animation-fill-mode: forwards;
   transform-origin: var(--radix-popover-content-transform-origin);
 }
-.raycast-submenu [command-root] {
+.kbar-submenu [command-root] {
   display: flex;
   flex-direction: column;
   width: 320px;
@@ -382,14 +381,14 @@ div [command-dialog-mask] {
   background: var(--gray2);
   border-radius: 8px;
 }
-.raycast-submenu [command-list] {
+.kbar-submenu [command-list] {
   padding: 8px;
   overflow: auto;
   overscroll-behavior: contain;
   transition: 100ms ease;
   transition-property: height;
 }
-.raycast-submenu [command-item] {
+.kbar-submenu [command-item] {
   height: 40px;
   cursor: pointer;
   height: 40px;
@@ -405,28 +404,28 @@ div [command-dialog-mask] {
   transition: all 150ms ease;
   transition-property: none;
 }
-.raycast-submenu [command-item][aria-selected="true"] {
+.kbar-submenu [command-item][aria-selected="true"] {
   background: var(--gray5);
   color: var(--gray12);
   @apply bg-gray-300;
 }
-.raycast-submenu [command-item][aria-selected="true"] [command-raycast-submenu-shortcuts] kbd {
+.kbar-submenu [command-item][aria-selected="true"] [command-kbar-submenu-shortcuts] kbd {
   background: var(--gray7);
 }
-.raycast-submenu [command-item][aria-disabled="true"] {
+.kbar-submenu [command-item][aria-disabled="true"] {
   color: var(--gray8);
   cursor: not-allowed;
 }
-.raycast-submenu [command-item] svg {
+.kbar-submenu [command-item] svg {
   width: 16px;
   height: 16px;
 }
-.raycast-submenu [command-item] [command-raycast-submenu-shortcuts] {
+.kbar-submenu [command-item] [command-kbar-submenu-shortcuts] {
   display: flex;
   margin-left: auto;
   gap: 2px;
 }
-.raycast-submenu [command-item] [command-raycast-submenu-shortcuts] kbd {
+.kbar-submenu [command-item] [command-kbar-submenu-shortcuts] kbd {
   background: var(--gray5);
   color: var(--gray11);
   height: 20px;
@@ -438,10 +437,10 @@ div [command-dialog-mask] {
   align-items: center;
   justify-content: center;
 }
-.raycast-submenu [command-item] [command-raycast-submenu-shortcuts] kbd:first-of-type {
+.kbar-submenu [command-item] [command-kbar-submenu-shortcuts] kbd:first-of-type {
   margin-left: 8px;
 }
-.raycast-submenu [command-group-heading] {
+.kbar-submenu [command-group-heading] {
   text-transform: capitalize;
   font-size: 12px;
   color: var(--gray11);
@@ -450,7 +449,7 @@ div [command-dialog-mask] {
   margin-top: 8px;
   margin-left: 4px;
 }
-.raycast-submenu [command-input] {
+.kbar-submenu [command-input] {
   padding: 12px;
   border: 0;
   border-top: 1px solid var(--gray6);
@@ -461,13 +460,13 @@ div [command-dialog-mask] {
   outline: 0;
   border-radius: 0;
 }
-.raycast-submenu[data-state="open"] {
+.kbar-submenu[data-state="open"] {
   animation-name: slideIn;
 }
-.raycast-submenu[data-state="closed"] {
+.kbar-submenu[data-state="closed"] {
   animation-name: slideOut;
 }
-.raycast-submenu [command-empty] {
+.kbar-submenu [command-empty] {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -497,7 +496,7 @@ div [command-dialog-mask] {
   }
 }
 @media (max-width: 640px) {
-  .raycast [command-input] {
+  .kbar [command-input] {
     font-size: 16px;
   }
 }

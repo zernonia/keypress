@@ -8,8 +8,7 @@ useHead({
   link: [{ rel: "icon", href: "/logo.svg" }],
 })
 
-// const body = ref()
-// useFocusTrap(body)
+// useFocusTrap("body", { immediate: true })
 
 // const activeElement = useActiveElement()
 
@@ -27,8 +26,11 @@ useHead({
 // })
 </script>
 <template>
-  <div ref="body" class="relative">
-    <!-- <div class="absolute top-0 left-0 w-0 h-0 border border-dark-50 transition-all ease-in-out" :style="boxStyle"></div> -->
+  <div class="relative">
+    <!-- <div
+      class="absolute z-200 top-0 left-0 w-0 h-0 border-3 border-light-900 rounded-2xl transition-all ease-in-out"
+      :style="boxStyle"
+    ></div> -->
 
     <NuxtLayout>
       <NuxtPage></NuxtPage>

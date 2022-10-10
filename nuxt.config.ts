@@ -3,7 +3,7 @@ import transformerDirective from "@unocss/transformer-directives"
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   modules: ["@unocss/nuxt", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxt/image-edge"],
-  css: ["@unocss/reset/tailwind.css", "~~/assets/main.css"],
+  css: ["@unocss/reset/tailwind.css", "~~/assets/main.css", "@formkit/themes/genesis"],
   runtimeConfig: {},
   unocss: {
     // presets
@@ -21,6 +21,10 @@ export default defineNuxtConfig({
           "border-radius": "1.5rem",
           background: "white !important",
         },
+        iframe: {
+          height: "400px",
+          "border-radius": "1.5rem",
+        },
       },
     },
     transformers: [transformerDirective({ enforce: "pre" })], // enabled `@unocss/transformer-directives`,
@@ -34,6 +38,7 @@ export default defineNuxtConfig({
     shortcuts: [
       {
         btn: " text-sm md:text-base font-medium rounded-2xl py-2 px-4 outline-none transition ring-3 ring-transparent disabled:opacity-50 relative inline-flex justify-center items-center shadow-none",
+        "btn-plain": "btn font-semibold text-gray-300 focus:text-dark-50 hover:text-dark-50",
         "btn-primary": "btn bg-dark-300 text-white focus:ring-gray-300 focus:shadow-xl",
         "btn-secondary": "btn bg-white hover:bg-gray-100 focus:ring-gray-100",
         "btn-danger": "btn bg-red-500 text-white hover:bg-red-600 focus:ring-red-300",

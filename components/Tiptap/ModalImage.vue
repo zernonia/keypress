@@ -13,6 +13,7 @@ const isVisible = ref(props.show)
 
 const { files, open: openFileDialog, reset } = useFileDialog({ accept: "image/*" })
 const { base64 } = useBase64(computed(() => files.value?.item?.(0)))
+const alt = ref("")
 
 const isLoading = ref(false)
 const save = async () => {
@@ -31,7 +32,7 @@ const save = async () => {
       .focus()
       .setImage({
         src: publicURL,
-        alt: "alt text",
+        alt: alt.value,
       })
       .run()
   }
@@ -49,22 +50,23 @@ watch(isVisible, () => {
 
 <template>
   <Modal v-model:open="isVisible">
-    <div class="flex flex-col p-4">
-      <h2>Add image</h2>
+    <div class="flex flex-col p-6">
+      <h2 class="text-3xl font-bold">Add image</h2>
 
       <div class="my-6">
-        <img class="h-64 w-auto m-auto object-contain" :src="base64" v-if="base64" />
+        <div class="h-64 w-full bg-light-300 flex items-center justify-center rounded-2xl overflow-hidden">
+          <img class="w-full h-full object-scale-down" :src="base64" v-if="base64" />
+        </div>
 
-        <button accept="image/*" type="button" @click="openFileDialog()" class="btn-primary">Upload</button>
+        <div class="mt-4 flex items-center">
+          <button accept="image/*" type="button" @click="openFileDialog()" class="btn-primary">Upload</button>
+          <input type="text" class="ml-4" name="alt-name" id="alt-name" placeholder="alternate" v-model="alt" />
+        </div>
       </div>
 
-      <div>
-        <label for="alt-name">Alt name</label>
-        <input type="text" name="alt-name" id="alt-name" />
-      </div>
-
-      <div>
-        <button @click="save">Save</button>
+      <div class="flex justify-end">
+        <button class="btn-plain" @click="isVisible = false">Cancel</button>
+        <Button class="btn-primary ml-2" :loading="isLoading" @click="save">Save</Button>
       </div>
     </div>
   </Modal>

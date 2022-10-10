@@ -4,13 +4,17 @@ import { Posts } from "~~/utils/types"
 useCustomHead("Experience keyboard-first blogging platform")
 
 const client = useSupabaseClient()
-const { data, pending } = useAsyncData("posts", async () => {
-  const { data } = await client
-    .from<Posts>("posts")
-    .select("*, profiles(avatar_url, name)")
-    .order("created_at", { ascending: false })
-  return data
-})
+const { data, pending } = useAsyncData(
+  "posts",
+  async () => {
+    const { data } = await client
+      .from<Posts>("posts")
+      .select("*, profiles(avatar_url, name)")
+      .order("created_at", { ascending: false })
+    return data
+  },
+  { lazy: true }
+)
 </script>
 
 <template>
@@ -30,7 +34,8 @@ const { data, pending } = useAsyncData("posts", async () => {
     />
 
     <h2 class="mt-20 text-4xl font-bold">Posts</h2>
-    <ul class="mt-4">
+    <Loader v-if="pending"></Loader>
+    <ul v-else class="mt-4">
       <li v-for="post in data">
         <PostCard :post="post"></PostCard>
       </li>

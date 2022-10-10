@@ -49,7 +49,7 @@ useMagicKeys({
   },
 })
 
-await useAsyncData(
+const { pending } = await useAsyncData(
   `post-${postId.value}`,
   async () => {
     if (!postId.value) throw Error("no id found")
@@ -84,20 +84,23 @@ definePageMeta({
 </script>
 
 <template>
-  <div ref="el" class="flex flex-col mt-8">
-    <div class="flex justify-end prose mx-auto w-full">
-      <button :disabled="isSaving" class="btn font-semibold text-gray-300 mr-6" @click="isDrawerOpen = true">
-        Edit <span class="ml-2">⌘E</span>
-      </button>
-      <button :disabled="isSaving" class="btn-primary" @click="save">Save <span class="ml-2">⌘S</span></button>
-    </div>
+  <div>
+    <Loader v-if="pending"></Loader>
+    <div v-else ref="el" class="flex flex-col mt-8">
+      <div class="flex justify-end prose mx-auto w-full">
+        <button :disabled="isSaving" class="btn-plain mr-6" @click="isDrawerOpen = true">
+          Edit <span class="ml-2">⌘E</span>
+        </button>
+        <Button :loading="isSaving" class="btn-primary" @click="save">Save <span class="ml-2">⌘S</span></Button>
+      </div>
 
-    <div class="p-2 prose mx-auto w-full">
-      <TiptapHeading v-model="title"></TiptapHeading>
-      <Tiptap editable v-model="body"></Tiptap>
-    </div>
+      <div class="p-2 prose mx-auto w-full">
+        <TiptapHeading v-model="title"></TiptapHeading>
+        <Tiptap editable v-model="body"></Tiptap>
+      </div>
 
-    <DrawerEditPost v-model:show="isDrawerOpen"></DrawerEditPost>
-    <div id="modal"></div>
+      <DrawerEditPost v-model:show="isDrawerOpen"></DrawerEditPost>
+      <div id="modal"></div>
+    </div>
   </div>
 </template>

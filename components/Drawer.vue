@@ -13,7 +13,8 @@ onKeyStroke("Escape", () => emits("update:open", false))
 
 watch(
   () => props.open,
-  (n) => nextTick(() => (n ? activate() : deactivate()))
+  (n) => nextTick(() => (n ? activate() : deactivate())),
+  { immediate: true }
 )
 </script>
 
