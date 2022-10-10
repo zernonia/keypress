@@ -1,22 +1,5 @@
 <script lang="ts" setup>
 const user = useSupabaseUser()
-const client = useSupabaseClient()
-
-const { hash, path } = toRefs(useRoute())
-
-onMounted(async () => {
-  if (hash.value) {
-    // await $fetch("/api/user-validation", {
-    //   method: "POST",
-    //   body: {
-    //     access_token: hash.value.slice(1),
-    //   },
-    // })
-    // user.value = (await client.auth.api.getUser(hash.value.slice(1))).data
-    // await client.auth.refreshSession()
-    // navigateTo(path.value) // remove hash value
-  }
-})
 </script>
 
 <template>
