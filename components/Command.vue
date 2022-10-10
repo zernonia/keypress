@@ -4,6 +4,7 @@ import { Command } from "vue-command-palette"
 const router = useRouter()
 const user = useSupabaseUser()
 const subdomain = useSubdomain()
+const url = useUrl()
 
 const keys = useMagicKeys()
 const CmdK = keys["Meta+K"]
@@ -32,9 +33,15 @@ const navList = computed(() =>
     ? [
         { label: "Home", value: "home", action: () => navAction("/"), show: true },
         {
+          label: "Write",
+          value: "write",
+          action: () => (window.location.href = url + "/write"),
+          show: true,
+        },
+        {
           label: "KeyPress",
           value: "keypress",
-          action: () => (window.location.href = "https://keypress.blog"),
+          action: () => (window.location.href = url),
           show: true,
         },
       ]
@@ -54,7 +61,7 @@ const navList = computed(() =>
       class="px-4 py-1 rounded-lg flex items-center text-gray-300 bg-transparent hover:bg-gray-100 focus:bg-gray-100 transition"
       @click="isVisible = true"
     >
-      <kbd class="mr-1 text-2xl">⌘</kbd>
+      <kbd>⌘</kbd>
       <kbd>K</kbd>
     </button>
     <Command.Dialog :visible="isVisible" theme="raycast" @select-item="handleSelectItem">
@@ -112,19 +119,6 @@ div [command-dialog-mask] {
   @apply bg-white shadow-lg relative max-w-screen-sm;
 }
 
-.raycast [command-dialog-wrapper] kbd {
-  height: 20px;
-  width: 20px;
-  border-radius: 4px;
-  padding: 0 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @apply text-gray-400 bg-light-300;
-}
-.raycast [command-dialog-wrapper] kbd:first-of-type {
-  margin-left: 8px;
-}
 .raycast [command-input] {
   border: none;
   width: 100%;

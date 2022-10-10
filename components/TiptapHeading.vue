@@ -5,6 +5,7 @@ import Text from "@tiptap/extension-text"
 import Heading from "@tiptap/extension-heading"
 import Placeholder from "@tiptap/extension-placeholder"
 import Focus from "@tiptap/extension-focus"
+import History from "@tiptap/extension-history"
 
 const props = defineProps<{
   modelValue: string
@@ -40,6 +41,7 @@ const editor = useEditor({
     Heading,
     Focus,
     Enter,
+    History,
     Placeholder.configure({
       placeholder: "What’s the title?",
     }),

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { Posts } from "~~/utils/types"
-import { stripHtml } from "string-strip-html"
-import { format } from "date-fns"
 
 const client = useSupabaseClient()
 
@@ -13,10 +11,14 @@ const { data, pending } = useAsyncData("posts", async () => {
   return data
 })
 
-const constructUrl = (name: string, slug: string) => {
-  if (process.dev) return `http://${name}.localhost:3000/${slug}`
-  else return `https://${name}.keypress.blog/${slug}`
+interface Tags {
+  name: string
+  count: number
 }
+const { data: tags } = useAsyncData("tags", async () => {
+  const { data } = await client.from<Tags>("tags_view").select("*")
+  return data
+})
 
 useCustomHead("Explore all posts")
 </script>
@@ -24,37 +26,26 @@ useCustomHead("Explore all posts")
 <template>
   <div class="my-20">
     <h1 class="text-4xl font-semibold">Posts</h1>
-    <div>
-      <ul>
-        <li class="my-4" v-for="post in data">
-          <NuxtLink class="focus:outline-none group" target="_blank" :to="constructUrl(post.profiles?.name, post.slug)">
-            <div
-              class="py-8 px-0 hover:px-8 bg-transparent hover:bg-white group-focus:px-8 group-focus:bg-white rounded-3xl transition-all flex"
-            >
-              <div>
-                <div class="flex items-center space-x-2">
-                  <NuxtImg class="w-5 h-5 rounded-full" :src="post.profiles.avatar_url"></NuxtImg>
-                  <h4 class="text-sm font-medium">{{ post.profiles.name }}</h4>
-                </div>
+    <div class="flex">
+      <div>
+        <div v-if="pending">
+          <Loader></Loader>
+        </div>
+        <ul v-else>
+          <li class="my-4" v-for="post in data">
+            <PostCard :post="post"></PostCard>
+          </li>
+        </ul>
+      </div>
+      <aside class="ml-6 w-60 flex-shrink-0">
+        <h5>Tags</h5>
 
-                <h1 class="mt-2 font-semibold text-2xl">{{ post.title }}</h1>
-                <p class="mt-1 text-gray-400">{{ stripHtml(post.body).result.slice(0, 120) }}...</p>
-
-                <div class="mt-2 text-sm text-gray-400">
-                  <span> {{ format(new Date(post.created_at), "MMM d") }}</span>
-                  <NuxtLink>{{ post.tags?.[0] }}</NuxtLink>
-                </div>
-              </div>
-              <NuxtImg
-                class="w-40 h-40 ml-12 rounded-xl flex-shrink-0"
-                v-if="post.cover_img"
-                :src="post.cover_img"
-              ></NuxtImg>
-            </div>
-          </NuxtLink>
-        </li>
-      </ul>
+        <ul>
+          <li v-for="tag in tags">
+            {{ tag.name }} <span>{{ tag.count }}</span>
+          </li>
+        </ul>
+      </aside>
     </div>
-    <!-- <aside></aside> -->
   </div>
 </template>

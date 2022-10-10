@@ -12,6 +12,33 @@ body {
 ::selection {
   @apply bg-gray-200;
 }
+::-webkit-scrollbar {
+  @apply bg-light-300 w-6px h-6px md:w-8px md:h-8px;
+}
+::-webkit-scrollbar-thumb {
+  @apply rounded-xl transition bg-light-900;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-300;
+}
+::-webkit-scrollbar-track {
+  @apply rounded-xl bg-transparent;
+}
+
+kbd {
+  height: 20px;
+  width: 20px;
+  border-radius: 4px;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  @apply text-gray-300 bg-light-300;
+}
+kbd:first-of-type {
+  margin-left: 8px;
+}
 
 .fade-enter-active,
 .fade-leave-active {
