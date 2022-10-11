@@ -3,7 +3,7 @@ import { Profiles } from "~~/utils/types"
 
 const client = useSupabaseClient()
 const subdomain = useSubdomain()
-const profile = useProfile()
+const profile = useSubdomainProfile()
 
 // this should fetch user's profiles and settings (if any)
 useAsyncData("profile", async () => {
