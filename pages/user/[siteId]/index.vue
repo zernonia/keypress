@@ -2,15 +2,14 @@
 import type { Posts } from "~~/utils/types"
 
 const client = useSupabaseClient()
-const subdomain = useSubdomain()
 const profile = useSubdomainProfile()
 
 const { data, pending } = useAsyncData("posts", async () => {
   const { data, error } = await client
     .from<Posts>("posts")
-    .select("*, profiles(username)")
-    // if the user has no subdomain set, we will get it from it's username
-    .or(`username.eq.${subdomain.value}, subdomain.eq.${subdomain.value}`, { foreignTable: "profiles" })
+    .select("*, profiles!inner (username)")
+    // @ts-ignore
+    .eq("profiles.id", profile.value.id)
     .order("created_at", { ascending: false })
 
   return data
