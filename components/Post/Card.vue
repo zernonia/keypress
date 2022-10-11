@@ -3,20 +3,14 @@ import { stripHtml } from "string-strip-html"
 import { format } from "date-fns"
 import { PropType } from "vue"
 import { Posts } from "~~/utils/types"
+import { constructUrl } from "~~/utils/functions"
 
 const props = defineProps({
   subdomain: Boolean,
   post: Object as PropType<Posts>,
 })
 
-const url = computed(() => {
-  if (props.subdomain) return `/${props.post.slug}`
-  if (process.dev) return `http://${props?.post?.profiles?.username}.localhost:3000/${props.post.slug}`
-  else {
-    if (props.post?.profiles?.domains?.active) return `https://${props.post.profiles.domains.url}/${props.post.slug}`
-    else return `https://${props?.post?.profiles?.username}.keypress.blog/${props.post.slug}`
-  }
-})
+const url = computed(() => constructUrl(props.post, props.subdomain))
 </script>
 
 <template>

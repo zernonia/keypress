@@ -9,9 +9,7 @@
   },
   "devDependencies": {
     "@iconify-json/ic": "^1.1.9",
-    "@iconify-json/logos": "^1.1.14",
-    "@iconify-json/ph": "^1.1.2",
-    "@iconify-json/uil": "^1.1.2",
+    "@iconify-json/mdi": "^1.1.9",
     "@nuxt/image-edge": "^1.0.0-27719579.87dcdf2",
     "@nuxtjs/supabase": "^0.1.25",
     "@unocss/nuxt": "^0.45.6",
