@@ -13,7 +13,7 @@ const { data, pending } = useAsyncData(
       .order("created_at", { ascending: false })
     return data
   },
-  { lazy: true, server: false }
+  { lazy: true }
 )
 </script>
 
