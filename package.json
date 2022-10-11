@@ -44,6 +44,7 @@
     "lowlight": "^2.7.0",
     "prosemirror-tables": "^1.2.5",
     "prosemirror-utils": "^0.9.6",
+    "satori": "^0.0.38",
     "slugify": "^1.6.5",
     "string-strip-html": "^11.6.10",
     "vue-command-palette": "^0.1.3"

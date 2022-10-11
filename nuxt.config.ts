@@ -2,7 +2,7 @@ import transformerDirective from "@unocss/transformer-directives"
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  modules: ["@unocss/nuxt", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxt/image-edge"],
+  modules: ["@unocss/nuxt", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxt/image-edge", "~~/modules/og"],
   css: ["@unocss/reset/tailwind.css", "~~/assets/main.css", "@formkit/themes/genesis"],
   runtimeConfig: {},
   unocss: {
@@ -57,5 +57,8 @@ export default defineNuxtConfig({
       "focus-trap",
       "@vueuse/integrations",
     ],
+  },
+  nitro: {
+    preset: "vercel",
   },
 })

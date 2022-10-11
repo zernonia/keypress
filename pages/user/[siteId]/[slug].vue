@@ -5,6 +5,7 @@ import { stripHtml } from "string-strip-html"
 
 const client = useSupabaseClient()
 const { params } = useRoute()
+const url = useUrl()
 
 const { data, pending } = useAsyncData(`posts-${params.slug}`, async () => {
   const { data } = await client
@@ -18,7 +19,7 @@ const { data, pending } = useAsyncData(`posts-${params.slug}`, async () => {
 useCustomHead(
   computed(() => data.value?.title),
   computed(() => (data.value?.body ? stripHtml(data.value?.body)?.result?.slice(0, 160) : undefined)),
-  computed(() => data.value?.cover_img)
+  computed(() => data.value?.cover_img ?? `${url}/og/${params.slug}`)
 )
 </script>
 
