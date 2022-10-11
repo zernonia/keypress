@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Posts } from "~~/utils/types"
+import type { Posts, Tags } from "~~/utils/types"
 
 const client = useSupabaseClient()
 
@@ -11,10 +11,6 @@ const { data, pending } = useAsyncData("posts", async () => {
   return data
 })
 
-interface Tags {
-  name: string
-  count: number
-}
 const { data: tags } = useAsyncData("tags", async () => {
   const { data } = await client.from<Tags>("tags_view").select("*")
   return data

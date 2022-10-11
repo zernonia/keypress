@@ -40,7 +40,8 @@ kbd:first-of-type {
   margin-left: 8px;
 }
 
-input {
+input[type="text"]:not(:where(.not-default)),
+input[type="url"]:not(:where(.not-default)) {
   @apply flex items-center rounded-2xl w-full h-10 py-1 md:py-2 px-5 bg-light-300  placeholder-gray-300 outline-none transition ring-3 ring-transparent !focus-within:ring-gray-300;
 }
 

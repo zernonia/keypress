@@ -36,7 +36,7 @@ watch(base64, (n) => (imageSrc.value = n))
     :disabled="isUploading"
     accept="image/*"
     type="button"
-    class="block w-full ring-3 outline-none ring-transparent hover:ring-gray-300 focus:ring-gray-300 rounded-2xl transition overflow-hidden"
+    class="block w-full p-0 ring-3 outline-none ring-transparent hover:ring-gray-300 focus:ring-gray-300 rounded-2xl transition overflow-hidden"
     @click="openFileDialog()"
   >
     <div class="h-64 w-full bg-light-300 flex items-center justify-center">

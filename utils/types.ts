@@ -30,3 +30,8 @@ export interface Posts {
   tags?: string[]
   profiles?: Profiles
 }
+
+export interface Tags {
+  name: string
+  count: number
+}

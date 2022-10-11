@@ -3,9 +3,15 @@ import { PropType } from "vue"
 
 const props = defineProps({
   show: Boolean,
+  settings: Object as PropType<{
+    image: string
+    active: boolean
+    tags: string[]
+  }>,
 })
 const emits = defineEmits(["update:show"])
-const image = ref("")
+const { settings } = toRefs(props)
+
 watch(
   () => props.show,
   () => {
@@ -21,20 +27,19 @@ watch(
   <Drawer :open="show" @update:open="emits('update:show', $event)">
     <div class="flex flex-col px-4 py-12">
       <h2 class="text-3xl font-bold">Settings</h2>
+      <div class="mt-8">
+        <Toggle class="mt-4" v-model="settings.active">Publish</Toggle>
+      </div>
 
       <div class="mt-8">
         <label for="url">Cover image: </label>
-        <Upload class="mt-4" v-model="image"></Upload>
+        <Upload class="mt-4" v-model="settings.image"></Upload>
       </div>
 
       <div class="mt-8">
         <label for="url">Tags: </label>
-        <input class="mt-2" type="url" name="url" id="alt-name" placeholder="https://keypress.blog/og.png" />
+        <TagsInput class="mt-4" v-model="settings.tags"></TagsInput>
       </div>
-
-      <!-- <div class="mt-4">
-        <Button class="btn-primary" @click="save">Save ⌘S</Button>
-      </div> -->
     </div>
   </Drawer>
 </template>

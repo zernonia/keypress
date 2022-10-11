@@ -11,11 +11,16 @@ const postId = ref(params.id)
 
 const title = postId.value ? ref("") : useLocalStorage("new-post-title", "")
 const body = postId.value ? ref("") : useLocalStorage("new-post-body", "")
+const settings = ref({
+  image: "",
+  active: false,
+  tags: [],
+})
 
 const isSaving = ref(false)
 const isLoginVisible = ref(false)
 const save = async () => {
-  if (!title.value || !stripHtml(body.value).result) return
+  if (!title.value || !stripHtml(body.value).result || isSaving.value) return
   if (!user.value?.id) {
     // login modal
     isLoginVisible.value = true
@@ -31,6 +36,9 @@ const save = async () => {
       title: title.value,
       body: body.value,
       author_id: user.value.id,
+      active: settings.value.active,
+      cover_img: settings.value.image,
+      tags: settings.value.tags,
     })
     .single()
   console.log({ data })
@@ -65,9 +73,14 @@ const { pending } = await useAsyncData(
   `post-${postId.value}`,
   async () => {
     if (!postId.value) throw Error("no id found")
-    const { data } = await client.from("posts").select("*").eq("id", postId.value).single()
+    const { data } = await client.from<Posts>("posts").select("*").eq("id", postId.value).single()
     title.value = data.title
     body.value = data.body
+    settings.value = {
+      image: data.cover_img ?? "",
+      active: data.active ?? false,
+      tags: data.tags ?? [],
+    }
 
     return data
   },
@@ -112,7 +125,7 @@ definePageMeta({
         <Tiptap editable v-model="body"></Tiptap>
       </div>
 
-      <DrawerEditPost v-model:show="isDrawerOpen"></DrawerEditPost>
+      <DrawerEditPost v-model:show="isDrawerOpen" :settings="settings"></DrawerEditPost>
       <div id="modal"></div>
       <ModalLogin v-model:show="isLoginVisible"></ModalLogin>
     </div>
