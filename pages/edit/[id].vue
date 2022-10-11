@@ -92,6 +92,7 @@ const isDrawerOpen = ref(false)
 useCustomHead("Write your post")
 definePageMeta({
   alias: "/write",
+  middleware: "auth",
 })
 </script>
 
