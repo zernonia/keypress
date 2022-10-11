@@ -7,14 +7,13 @@ const el = ref()
 onClickOutside(el, () => {
   emits("update:open", !props.open)
 })
-const { activate, deactivate } = useFocusTrap(el)
+const { activate, deactivate } = useFocusTrap(el, { immediate: true })
 
 onKeyStroke("Escape", () => emits("update:open", false))
 
 watch(
   () => props.open,
-  (n) => nextTick(() => (n ? activate() : deactivate())),
-  { immediate: true }
+  (n) => nextTick(() => (n ? activate() : deactivate()))
 )
 </script>
 

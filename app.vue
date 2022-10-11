@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useFocusTrap } from "@vueuse/integrations/useFocusTrap"
 import { StyleValue } from "vue"
+import { createFocusTrap } from "focus-trap"
 
 useHead({
   charset: "utf-8",
@@ -8,7 +9,10 @@ useHead({
   link: [{ rel: "icon", href: "/logo.svg" }],
 })
 
-// useFocusTrap("body", { immediate: true })
+onMounted(() => {
+  const trap = createFocusTrap("body", { escapeDeactivates: false })
+  trap.activate()
+})
 
 // const activeElement = useActiveElement()
 

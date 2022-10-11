@@ -41,8 +41,7 @@ const checkDomain = async () => {
 }
 
 onMounted(() => {
-  const url = profile.value.domains.find((i) => i.url === profile.value.subdomain)
-  if (url.active) {
+  if (profile.value.domains.active) {
     isValid.value = true
   } else if (!payload.value.subdomain) {
     isValid.value = false

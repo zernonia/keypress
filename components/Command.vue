@@ -39,6 +39,12 @@ const navList = computed(() =>
           show: true,
         },
         {
+          label: "Login",
+          value: "login",
+          action: () => (window.location.href = url + "/login"),
+          show: true,
+        },
+        {
           label: "KeyPress",
           value: "keypress",
           action: () => (window.location.href = url),
@@ -50,7 +56,7 @@ const navList = computed(() =>
         { label: "Write", value: "write", action: () => navAction("/write"), show: true },
         { label: "Posts", value: "posts", action: () => navAction("/posts"), show: true },
         { label: "Login", value: "login", action: () => navAction("/login"), show: !user.value?.id },
-        { label: "Dashboard", value: "dashboard", action: () => navAction("/dashboard"), show: user.value?.id },
+        { label: "Dashboard", value: "dashboard", action: () => navAction("/dashboard/posts"), show: user.value?.id },
       ]
 )
 </script>

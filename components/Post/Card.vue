@@ -13,7 +13,7 @@ const url = computed(() => {
   if (props.subdomain) return `/${props.post.slug}`
   if (process.dev) return `http://${props.post.profiles.username}.localhost:3000/${props.post.slug}`
   else {
-    if (props.post.profiles.subdomain) return `https://${props.post.profiles.subdomain}/${props.post.slug}`
+    if (props.post.profiles.domains.active) return `https://${props.post.profiles.subdomain}/${props.post.slug}`
     else return `https://${props.post.profiles.username}.keypress.blog/${props.post.slug}`
   }
 })
