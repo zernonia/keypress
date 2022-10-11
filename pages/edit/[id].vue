@@ -27,7 +27,7 @@ const save = async () => {
     .from<Posts>("posts")
     .upsert({
       id: postId.value?.toString(),
-      slug: slugify(title.value),
+      slug: slugify(title.value, { lower: true }),
       title: title.value,
       body: body.value,
       author_id: user.value.id,
