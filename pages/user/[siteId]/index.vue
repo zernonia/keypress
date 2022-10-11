@@ -8,6 +8,7 @@ const { data, pending } = useAsyncData("posts", async () => {
   const { data, error } = await client
     .from<Posts>("posts")
     .select("*, profiles!inner (username)")
+    .eq("active", true)
     // @ts-ignore
     .eq("profiles.id", profile.value.id)
     .order("created_at", { ascending: false })
