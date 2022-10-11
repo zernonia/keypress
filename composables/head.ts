@@ -1,4 +1,3 @@
-import { MaybeRef } from "@vueuse/shared"
 import { ComputedRef } from "vue"
 
 export const useCustomHead = (
@@ -20,13 +19,13 @@ export const useCustomHead = (
         name: "twitter:description",
         content: description ?? "KeyPress",
       },
-      { name: "twitter:image", content: image ?? "https://keypress.blog/og.jpg" },
+      { name: "twitter:image", content: image ?? "https://keypress.blog/og.png" },
       { property: "og:type", content: "website" },
       { property: "og:title", content: title ?? "KeyPress | Write your blog with keyboard only experience" },
       { property: "og:url", content: "https://keypress.blog/" },
-      { property: "og:image", content: image ?? "https://keypress.blog/og.jpg" },
-      { property: "og:image:secure_url", content: image ?? "https://keypress.blog/og.jpg" },
-      { property: "og:image:type", content: "image/jpg" },
+      { property: "og:image", content: image ?? "https://keypress.blog/og.png" },
+      { property: "og:image:secure_url", content: image ?? "https://keypress.blog/og.png" },
+      { property: "og:image:type", content: "image/png" },
       {
         property: "og:description",
         content: description ?? "KeyPress",

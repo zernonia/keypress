@@ -1,7 +1,8 @@
 import { readFileSync } from "fs"
-import { join } from "path"
+import { join, resolve } from "path"
 import { serverSupabaseClient } from "#supabase/server"
 import { useUrl } from "~~/composables/url"
+import { Resvg, ResvgRenderOptions } from "@resvg/resvg-js"
 import type { Posts } from "~~/utils/types"
 import satori from "satori"
 
@@ -9,6 +10,7 @@ export default defineEventHandler(async (event) => {
   const client = serverSupabaseClient(event)
   const url = useUrl()
   const slug = event.context.params.slug
+  const fonts = ["arial.ttf", "arial_bold.ttf"]
 
   try {
     const { data, error } = await client
@@ -113,13 +115,13 @@ export default defineEventHandler(async (event) => {
         fonts: [
           {
             name: "Arial",
-            data: readFileSync(join(process.cwd(), "public/fonts", "arial.ttf")),
+            data: readFileSync(join(process.cwd(), "public/fonts", fonts[0])),
             weight: 400,
             style: "normal",
           },
           {
             name: "Arial",
-            data: readFileSync(join(process.cwd(), "public/fonts", "arial_bold.ttf")),
+            data: readFileSync(join(process.cwd(), "public/fonts", fonts[1])),
             weight: 700,
             style: "normal",
           },
@@ -127,8 +129,42 @@ export default defineEventHandler(async (event) => {
       }
     )
 
+    // render to svg as image
+
+    const resvg = new Resvg(svg, {
+      fitTo: {
+        mode: "width",
+        value: 1200,
+      },
+      font: {
+        fontFiles: fonts.map((i) => join(resolve("."), "public/fonts", i)), // Load custom fonts.
+        loadSystemFonts: false,
+      },
+    })
+
+    const resolved = await Promise.all(
+      resvg.imagesToResolve().map(async (url) => {
+        console.info("image url", url)
+        const img = await fetch(url)
+        const buffer = await img.arrayBuffer()
+        return {
+          url,
+          buffer: Buffer.from(buffer),
+        }
+      })
+    )
+    if (resolved.length > 0) {
+      for (const result of resolved) {
+        const { url, buffer } = result
+        resvg.resolveImage(url, buffer)
+      }
+    }
+
+    const renderData = resvg.render()
+    const pngBuffer = renderData.asPng()
+
     event.res.setHeader("Cache-Control", "s-maxage=7200, stale-while-revalidate")
-    return svg
+    return pngBuffer
   } catch (err) {
     return createError({ statusCode: 500, statusMessage: err })
   }

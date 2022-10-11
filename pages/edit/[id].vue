@@ -106,7 +106,7 @@ definePageMeta({
         <Button :loading="isSaving" class="btn-primary" @click="save">Save <span class="ml-2">⌘S</span></Button>
       </div>
 
-      <div class="p-2 prose mx-auto w-full">
+      <div class="p-2 prose mx-auto w-full" spellcheck="false">
         <TiptapHeading v-model="title"></TiptapHeading>
         <Tiptap editable v-model="body"></Tiptap>
       </div>
