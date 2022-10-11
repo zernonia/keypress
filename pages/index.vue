@@ -9,11 +9,11 @@ const { data, pending } = useAsyncData(
   async () => {
     const { data } = await client
       .from<Posts>("posts")
-      .select("*, profiles(avatar_url, name, username, subdomain)")
+      .select("*, profiles(avatar_url, name, username, domains (url, active) )")
       .order("created_at", { ascending: false })
     return data
   },
-  { lazy: true }
+  { lazy: true, server: false }
 )
 </script>
 

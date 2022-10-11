@@ -6,7 +6,7 @@ const client = useSupabaseClient()
 const { data, pending } = useAsyncData("posts", async () => {
   const { data } = await client
     .from<Posts>("posts")
-    .select("*, profiles(avatar_url, name,username, subdomain)")
+    .select("*, profiles(avatar_url, name,username, domains (url, active))")
     .order("created_at", { ascending: false })
   return data
 })
