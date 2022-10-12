@@ -1,13 +1,15 @@
 /* for easy focus tracking */
-*:not(:where(.not-default, [data-tippy-root])) {
+button:not(:where(.not-default, [data-tippy-root])),
+a:not(:where(.not-default, [data-tippy-root])) {
   outline: 2px solid transparent;
   outline-offset: 15px;
   transition: 0.3s all ease !important;
 }
-*:not(:where(.not-default)):focus {
-  outline-offset: 6px;
+button:not(:where(.not-default)):focus,
+a:not(:where(.not-default)):focus {
+  outline-offset: 2px;
   outline: 2px solid #2d2d2d;
-  border-radius: calc(1% + 12px);
+  border-radius: 1rem;
 }
 
 html {

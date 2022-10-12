@@ -87,19 +87,6 @@ const { pending } = await useAsyncData(
   { server: false, lazy: true }
 )
 
-// todo: visit focus trap in the future
-// const el = ref<HTMLElement>()
-// const { activate, deactivate } = useFocusTrap(el )
-// const isVisible = useState("command-visible")
-
-// watch(
-//   isVisible,
-//   (n) => {
-//     n ? deactivate() : activate()
-//   },
-//   { immediate: true }
-// )
-
 const isDrawerOpen = ref(false)
 
 useCustomHead("Write your post")
@@ -120,7 +107,7 @@ definePageMeta({
         <Button :loading="isSaving" class="btn-primary" @click="save">Save <span class="ml-2">⌘S</span></Button>
       </div>
 
-      <div class="p-2 prose mx-auto w-full" spellcheck="false">
+      <div class="md:p-2 prose mx-auto w-full" spellcheck="false">
         <TiptapHeading v-model="title"></TiptapHeading>
         <Tiptap editable v-model="body"></Tiptap>
       </div>

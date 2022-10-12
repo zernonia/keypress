@@ -20,12 +20,9 @@ const { data, pending } = useAsyncData(
 
 <template>
   <div>
-    <div class="my-32 text-center">
-      <h1 class="text-6xl font-bold">
-        Write your story
-        <!-- <NuxtLink class="text-6xl h-min font-bold text-light-9 00" to="/write">Write your story...</NuxtLink> -->
-      </h1>
-      <h2 class="mt-2 text-4xl font-bold text-light-900">with keyboard only</h2>
+    <div class="my-20 md:my-32 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold">Write your story</h1>
+      <h2 class="mt-2 text-2xl md:text-4xl font-bold text-gray-300">with keyboard only</h2>
     </div>
 
     <NuxtImg

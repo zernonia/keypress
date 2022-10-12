@@ -21,7 +21,7 @@ watch(
 <template>
   <transition name="slide-in-right">
     <div v-if="open" class="fixed top-0 left-0 w-screen h-screen z-100 flex justify-end">
-      <div ref="el" class="inner w-full max-w-112 bg-white rounded-xl shadow-xl overflow-hidden">
+      <div ref="el" class="inner w-full max-w-112 ml-8 bg-white rounded-xl shadow-xl overflow-hidden">
         <slot>Content</slot>
       </div>
     </div>
