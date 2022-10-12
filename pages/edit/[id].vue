@@ -102,7 +102,7 @@ definePageMeta({
     <div v-else ref="el" class="flex flex-col mt-8">
       <div class="flex justify-end prose mx-auto w-full">
         <button :disabled="isSaving" class="btn-plain mr-6" @click="isDrawerOpen = true">
-          Edit <span class="ml-2">⌘E</span>
+          Settings <span class="ml-2">⌘E</span>
         </button>
         <Button :loading="isSaving" class="btn-primary" @click="save">Save <span class="ml-2">⌘S</span></Button>
       </div>

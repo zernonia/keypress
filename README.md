@@ -1,42 +1,105 @@
-# Nuxt 3 Minimal Starter
+<br />
+<p align="center">
+  <a href="https://github.com/zernonia/keypress">
+    <img src="public/logo.svg" alt="KeyPress's Logo" width="80">
+  </a>
+  <br />
 
-Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
+  <p align="center">
+    A keyboard-first blogging platform. <br> 
+    Finally write your blog post only with keys 🎹
+  </p>
 
-## Setup
+  <p align="center"> 
+    <a href="https://keypress.blog/">View Demo</a>
+    ·
+    <a href="https://github.com/zernonia/keypress/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/zernonia/keypress/issues">Request Feature</a>
+  </p>
+</p>
 
-Make sure to install the dependencies:
+<br/>
 
-```bash
-# yarn
-yarn install
+![KeyPress - open-source blogging platform that focused on keyboard-first experience](public/hero.png)
 
-# npm
-npm install
+## Introduction
 
-# pnpm
-pnpm install --shamefully-hoist
-```
+KeyPress is an open-source blogging platform that focused on keyboard-first experience. It was inspired by Vercel's Platform Starter Kit.
 
-## Development Server
+I always wanted to build a multi-tenant platform using [Nuxt3](https://v3.nuxtjs.org/), and I finally did it! - in `nuxt-rc11`.
 
-Start the development server on http://localhost:3000
+If you are interested to implement the same, checkout
 
-```bash
-npm run dev
-```
+1. [`server/middleware/subdomain.ts`](https://github.com/zernonia/keypress/blob/main/server/middleware/subdomain.ts) - check the current domain and set srr context.
+2. [`app/router.option.ts`](https://github.com/zernonia/keypress/blob/main/app/router.options.ts) - based on the ssr context, map a new route.
+3. [`pages/user/[siteId]`](https://github.com/zernonia/keypress/tree/main/pages/user/%5BsiteId%5D) - this will now be your new router root
 
-## Production
+## 🚀 Features
 
-Build the application for production:
+- 🤩 Free
+- 📖 Open-Source
+- 🚀 Free custom domain
 
-```bash
-npm run build
-```
+### 🔨 Built With
 
-Locally preview production build:
+- [Nuxt 3](https://v3.nuxtjs.org/)
+- [Supabase](https://supabase.com)
+- [UnoCss](https://uno.antfu.me/)
+- [Vercel - Hosting & Domain](https://vercel.com)
 
-```bash
-npm run preview
-```
+## 🌎 Local Development
 
-Checkout the [deployment documentation](https://v3.nuxtjs.org/guide/deploy/presets) for more information.
+### Prerequisites
+
+Yarn
+
+- ```sh
+  npm install --global yarn
+  ```
+
+### Development
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/zernonia/keypress.git
+   ```
+2. Install NPM packages
+   ```sh
+   cd keypress
+   yarn install
+   ```
+3. Run local development instance
+   ```sh
+   yarn dev
+   ```
+
+## ➕ Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📜 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+# 📧 Contact
+
+Zernonia - [@zernonia](https://twitter.com/zernonia) - zernonia@gmail.com
+
+Also, if you like my work, please buy me a coffee ☕😳
+
+<a href="https://www.buymeacoffee.com/zernonia" target="_blank">
+    <img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Logo" >
+  </a>
+
+# 🔥 Contributors
+
+<a href="https://github.com/zernonia/keypress/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=zernonia/keypress" />
+</a>

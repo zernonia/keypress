@@ -16,20 +16,54 @@ const { data, pending } = useAsyncData(
   },
   { lazy: true }
 )
+
+const writeEl = ref()
+const { Slash } = useMagicKeys()
+watch(Slash, (n) => {
+  if (n && writeEl.value) {
+    writeEl.value.$el.focus()
+    setTimeout(() => {
+      writeEl.value.$el.click()
+    }, 300)
+  }
+})
 </script>
 
 <template>
-  <div>
-    <div class="my-20 md:my-32 text-center">
-      <h1 class="text-4xl md:text-6xl font-bold">Write your story</h1>
-      <h2 class="mt-2 text-2xl md:text-4xl font-bold text-gray-300">with keyboard only</h2>
+  <div class="pb-20">
+    <div class="relative my-20 md:my-30 text-center">
+      <div class="z-100">
+        <h1 class="text-4xl md:text-6xl font-bold">
+          Keyboard-first <br />
+          Blogging Platform
+        </h1>
+
+        <h2 class="mt-8 text-xl md:text-3xl font-semibold text-gray-300">
+          KeyPress let you write your blog <br />
+          with only keyboard
+        </h2>
+
+        <div class="mt-12 flex flex-col items-center justify-center">
+          <NuxtLink ref="writeEl" class="btn-primary text-xl" to="/write">Press '/' to write</NuxtLink>
+          <span class="text-sm mt-2 text-gray-300">or 'Tab' to Navigate</span>
+        </div>
+      </div>
     </div>
 
-    <NuxtImg
-      class="w-80 h-auto"
-      src="https://images.unsplash.com/photo-1665049420194-8f562db50cbd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
-      alt=""
-    />
+    <NuxtLink to="https://github.com/zernonia/keypress" target="_blank" class="w-full relative block">
+      <NuxtImg
+        style="object-position: 0 20%"
+        class="w-full h-80 object-cover rounded-2xl"
+        src="https://images.unsplash.com/photo-1665049420194-8f562db50cbd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80"
+        alt=""
+      />
+      <h3
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-3xl font-semibold flex flex-wrap items-center"
+      >
+        <div class="i-mdi-github mr-2"></div>
+        Nuxt 3 + Supabase + Vercel
+      </h3>
+    </NuxtLink>
 
     <h2 class="mt-20 text-4xl font-bold">Posts</h2>
     <Loader v-if="pending"></Loader>
