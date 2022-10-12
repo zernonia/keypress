@@ -5,7 +5,7 @@ export default defineNuxtPlugin(() => {
   }
   const options = { ...moduleOptions }
 
-  if (process.env.NODE_ENV === "production" && moduleOptions.websiteId) {
+  if (moduleOptions.websiteId) {
     loadScript(options)
   }
 })
