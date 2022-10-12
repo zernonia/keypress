@@ -9,7 +9,7 @@ const url = useUrl()
 const keys = useMagicKeys()
 const CmdK = keys["Meta+K"]
 const Escape = keys["Escape"]
-const isVisible = useState("command-visible", () => true)
+const isVisible = useState("command-visible", () => false)
 
 watch(CmdK, (v) => {
   if (v) {
@@ -37,7 +37,13 @@ const navList = computed(() =>
           label: "Login",
           value: "login",
           action: () => (window.location.href = url + "/login"),
-          show: true,
+          show: !user.value?.id,
+        },
+        {
+          label: "Dashboard",
+          value: "dashboard",
+          action: () => (window.location.href = url + "/dashboard/posts"),
+          show: user.value?.id,
         },
         {
           label: "KeyPress",
