@@ -103,7 +103,7 @@ Also, if you like my work, please buy me a coffee ☕😳
     <img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Logo" >
   </a>
 
-# 🔥 Contributors
+## 🔥 Contributors
 
 <a href="https://github.com/zernonia/keypress/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=zernonia/keypress" />
