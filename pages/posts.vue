@@ -23,7 +23,7 @@ useCustomHead("Explore all posts")
 <template>
   <div class="my-12">
     <h1 class="text-4xl font-semibold">Posts</h1>
-    <div class="flex">
+    <div class="flex flex-col-reverse md:flex-row">
       <div class="w-full">
         <div v-if="pending">
           <Loader></Loader>
@@ -34,12 +34,13 @@ useCustomHead("Explore all posts")
           </li>
         </ul>
       </div>
-      <aside class="ml-6 w-60 flex-shrink-0">
-        <h5>Tags</h5>
+      <aside class="md:ml-6 md:w-60 mt-3 flex-shrink-0">
+        <h5 class="text-xl font-medium">Tags</h5>
 
-        <ul>
-          <li v-for="tag in tags">
-            {{ tag.name }} <span>{{ tag.count }}</span>
+        <ul class="mt-4 p-4 bg-light-600 rounded-xl flex flex-col space-y-2">
+          <li v-for="tag in tags" class="flex justify-between items-center">
+            <div class="text-sm">{{ tag.name }}</div>
+            <div class="text-xs px-1 py-0.5 flex items-center bg-gray-200 font-medium rounded">{{ tag.count }}</div>
           </li>
         </ul>
       </aside>
