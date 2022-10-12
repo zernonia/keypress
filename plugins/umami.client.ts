@@ -7,6 +7,7 @@ export default defineNuxtPlugin(() => {
   }
   const options = { ...moduleOptions }
 
+  console.log(cfg.public, moduleOptions.websiteId)
   if (moduleOptions.websiteId) {
     loadScript(options)
   }
@@ -21,6 +22,6 @@ function loadScript(options: any) {
   script.dataset.websiteId = options.websiteId
   script.dataset.domains = options.domains
   script.src = options.scriptUrl
-
+  console.log(script)
   head.appendChild(script)
 }
