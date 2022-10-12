@@ -29,6 +29,17 @@ export default defineNuxtConfig({
           height: "400px",
           "border-radius": "1.5rem",
         },
+        "p code": {
+          padding: "0.25rem 0.5rem",
+          "border-radius": "0.35rem",
+          "background-color": "#ececec",
+        },
+        "code::before": {
+          content: "''",
+        },
+        "code::after": {
+          content: "''",
+        },
       },
     },
     transformers: [transformerDirective({ enforce: "pre" })], // enabled `@unocss/transformer-directives`,
