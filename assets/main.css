@@ -1,5 +1,5 @@
 /* for easy focus tracking */
-*:not(:where(.not-default)) {
+*:not(:where(.not-default, [data-tippy-root])) {
   outline: 2px solid transparent;
   outline-offset: 15px;
   transition: 0.3s all ease !important;
