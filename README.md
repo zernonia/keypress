@@ -40,6 +40,7 @@ If you are interested to implement the same, checkout
 - 🤩 Free
 - 📖 Open-Source
 - 🚀 Free custom domain
+- 🌌 Auto OG image (using [Satori](https://github.com/vercel/satori))
 
 ### 🔨 Built With
 
@@ -84,13 +85,17 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📜 License
+## Acknowledgement
 
-Distributed under the MIT License. See `LICENSE` for more information.
+1. [Nuxt 3 - Awesome framework](https://v3.nuxtjs.org/)
+1. [Supabase - Super easy setup (as always)](https://supabase.com)
+1. [Tiptap - Awesome editor](https://tiptap.dev/)
+1. [Vercel's Platform Starter Kit - Subdomain/Custom domain](https://github.com/vercel/platforms)
+1. [Vercel's new og generation](https://github.com/vercel/satori)
 
-# 📧 Contact
+## Author
 
-Zernonia - [@zernonia](https://twitter.com/zernonia) - zernonia@gmail.com
+- Zernonia ([@zernonia](https://twitter.com/zernonia))
 
 Also, if you like my work, please buy me a coffee ☕😳
 
@@ -103,3 +108,7 @@ Also, if you like my work, please buy me a coffee ☕😳
 <a href="https://github.com/zernonia/keypress/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=zernonia/keypress" />
 </a>
+
+## 📜 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
