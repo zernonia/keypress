@@ -1,7 +1,9 @@
 export default defineNuxtPlugin(() => {
+  const cfg = useRuntimeConfig()
+
   const moduleOptions = {
     scriptUrl: "https://umami-zernonia.vercel.app/umami.js",
-    websiteId: process.env?.UMAMI_WEBSITE_ID,
+    websiteId: cfg.public.UMAMI_WEBSITE_ID,
   }
   const options = { ...moduleOptions }
 

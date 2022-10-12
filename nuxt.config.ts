@@ -4,7 +4,11 @@ import transformerDirective from "@unocss/transformer-directives"
 export default defineNuxtConfig({
   modules: ["@unocss/nuxt", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxt/image-edge", "~~/modules/og"],
   css: ["@unocss/reset/tailwind.css", "~~/assets/main.css"],
-  runtimeConfig: {},
+  runtimeConfig: {
+    public: {
+      UMAMI_WEBSITE_ID: process.env.UMAMI_WEBSITE_ID,
+    },
+  },
   unocss: {
     // presets
     uno: true, // enabled `@unocss/preset-uno`
@@ -50,13 +54,7 @@ export default defineNuxtConfig({
     domains: ["avatars0.githubusercontent.com", "avatars.githubusercontent.com/", "images.unsplash.com/"],
   },
   build: {
-    transpile: [
-      "@tiptap/extension-link",
-      "@tiptap/extension-placeholder",
-      "@tiptap/extension-document",
-      "focus-trap",
-      "@vueuse/integrations",
-    ],
+    transpile: ["@tiptap/extension-link", "@tiptap/extension-placeholder", "@tiptap/extension-document"],
   },
   nitro: {
     preset: "vercel",
