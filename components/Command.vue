@@ -90,12 +90,15 @@ const navList = computed(() =>
           <kbd>↵</kbd>
         </button> -->
 
-        <hr />
+        <!-- <hr />
         <button command-kbar-subcommand-trigger="">
           Actions
           <kbd>⌘</kbd>
           <kbd>K</kbd>
-        </button>
+        </button> -->
+        <div>
+          <button>Share</button>
+        </div>
       </template>
     </Command.Dialog>
   </div>

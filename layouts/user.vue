@@ -23,7 +23,12 @@ const user = useSupabaseUser()
           </div>
         </div>
       </nav>
-      <slot />
+
+      <div class="min-h-screen">
+        <slot />
+      </div>
+
+      <Footer></Footer>
     </div>
   </div>
 </template>

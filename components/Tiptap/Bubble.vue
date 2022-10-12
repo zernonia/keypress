@@ -70,7 +70,7 @@ const nodeType = computed<NodeType | undefined>(() => {
 
 <style lang="postcss">
 .bubble-item {
-  @apply focus:outline-none focus:bg-light-500 focus:text-dark-300 p-1 rounded-lg transition;
+  @apply focus:bg-light-500 focus:text-dark-300 p-1 rounded-lg transition;
 }
 .is-active {
   @apply !text-dark-300;

@@ -28,6 +28,7 @@ useCustomHead(computed(() => `${profile.value?.name}'s blog`))
           <PostCard subdomain v-if="post.id" :post="post"></PostCard>
         </li>
       </ul>
+      <Loader v-if="pending"></Loader>
     </div>
     <!-- <aside></aside> -->
   </div>

@@ -14,8 +14,6 @@ onMounted(() => {
   trap.activate()
 })
 
-// const activeElement = useActiveElement()
-
 // const boxStyle = computed<StyleValue>(() => {
 //   const el = activeElement.value
 

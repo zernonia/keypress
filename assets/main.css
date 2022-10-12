@@ -1,3 +1,15 @@
+/* for easy focus tracking */
+*:not(:where(.not-default)) {
+  outline: 2px solid transparent;
+  outline-offset: 15px;
+  transition: 0.3s all ease !important;
+}
+*:not(:where(.not-default)):focus {
+  outline-offset: 6px;
+  outline: 2px solid #2d2d2d;
+  border-radius: calc(1% + 12px);
+}
+
 html {
   scroll-behavior: smooth;
 }

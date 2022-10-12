@@ -28,11 +28,10 @@ const { data: tags } = useAsyncData("tags", async () => {
       :close-on-select="false"
       :searchable="true"
       :classes="{
-        container:
-          'relative mx-auto p-2 w-full flex items-center justify-end cursor-pointer rounded-2xl bg-light-300 outline-none',
+        container: 'relative mx-auto p-2 w-full flex items-center justify-end cursor-pointer rounded-2xl bg-light-300',
         tag: 'bg-dark-300 text-white text-sm font-semibold py-0.5 pl-2 rounded-lg mr-1.5 mb-1.5 flex items-center whitespace-nowrap rtl:pl-0 rtl:pr-2 rtl:mr-0 rtl:ml-1',
         tagsSearch:
-          'not-default bg-transparent absolute inset-0 border-0 outline-none focus:ring-0 appearance-none p-0 text-base font-sans box-border w-full',
+          'not-default bg-transparent absolute inset-0 border-0 focus:ring-0 outline-none appearance-none p-0 text-base font-sans box-border w-full',
         tagsSearchCopy: 'invisible whitespace-pre-wrap inline-block h-px',
         placeholder:
           'flex items-center h-full absolute left-2 top-0 pointer-events-none bg-transparent leading-snug pl-3.5 text-gray-400 rtl:left-auto rtl:right-0 rtl:pl-0 rtl:pr-3.5',

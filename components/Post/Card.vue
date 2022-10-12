@@ -14,7 +14,7 @@ const url = computed(() => constructUrl(props.post, props.subdomain))
 </script>
 
 <template>
-  <NuxtLink class="focus:outline-none group" :target="subdomain ? '' : '_blank'" :to="url">
+  <NuxtLink class="group block" :target="subdomain ? '' : '_blank'" :to="url">
     <div
       class="p-6 my-4 bg-white shadow-none group-focus:shadow-xl group-focus:shadow-xl shadow-gray-200 rounded-3xl transition-all flex"
     >
