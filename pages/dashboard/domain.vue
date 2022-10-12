@@ -92,7 +92,7 @@ onMounted(() => {
           </div>
         </div>
 
-        <div class="mt-4 text-sm text-gray-300">
+        <div class="mt-4 text-sm text-gray-400">
           Depending on your provider, it might take some time for the changes to apply.
 
           <NuxtLink target="_blank" to="https://vercel.com/guides/why-is-my-vercel-domain-unverified"

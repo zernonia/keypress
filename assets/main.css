@@ -48,7 +48,7 @@ kbd {
   align-items: center;
   justify-content: center;
   font-family: inherit;
-  @apply text-gray-300 bg-light-300;
+  @apply text-gray-400 bg-light-300;
 }
 kbd:first-of-type {
   margin-left: 8px;
@@ -56,7 +56,7 @@ kbd:first-of-type {
 
 input[type="text"]:not(:where(.not-default)),
 input[type="url"]:not(:where(.not-default)) {
-  @apply flex items-center rounded-2xl w-full h-10 py-1 md:py-2 px-5 bg-light-300  placeholder-gray-300 outline-none transition ring-3 ring-transparent !focus-within:ring-gray-300;
+  @apply flex items-center rounded-2xl w-full h-10 py-1 md:py-2 px-5 bg-light-300  placeholder-gray-400 outline-none transition ring-3 ring-transparent !focus-within:ring-gray-400;
 }
 
 .fade-enter-active,

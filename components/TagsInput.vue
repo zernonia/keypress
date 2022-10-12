@@ -40,7 +40,7 @@ const { data: tags } = useAsyncData("tags", async () => {
         dropdownHidden: '!hidden',
         optionPointed: 'text-dark-300 bg-light-700',
         optionSelected: 'text-dark-300 bg-light-700',
-        noResults: 'py-2 px-3 text-gray-300 text-center font-semibold',
+        noResults: 'py-2 px-3 text-gray-400 text-center font-semibold',
       }"
     />
   </div>
@@ -53,6 +53,6 @@ const { data: tags } = useAsyncData("tags", async () => {
   @apply rounded-b-none transition;
 }
 .is-active {
-  @apply ring-3 ring-gray-300;
+  @apply ring-3 ring-gray-400;
 }
 </style>
