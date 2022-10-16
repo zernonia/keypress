@@ -16,7 +16,7 @@ const { data, pending } = useAsyncData(
 
     return data;
   },
-  { lazy: true, server: false }
+  { lazy: true }
 );
 
 const writeEl = ref();
