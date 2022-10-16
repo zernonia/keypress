@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import type { Posts } from "~~/utils/types"
+import type { Posts } from "~~/utils/types";
 
-const client = useSupabaseClient()
-const profile = useSubdomainProfile()
+const client = useSupabaseClient();
+const profile = useSubdomainProfile();
 
 const { data, pending } = useAsyncData("posts", async () => {
   const { data, error } = await client
@@ -11,12 +11,13 @@ const { data, pending } = useAsyncData("posts", async () => {
     .eq("active", true)
     // @ts-ignore
     .eq("profiles.id", profile.value.id)
-    .order("created_at", { ascending: false })
+    .order("featured", { ascending: false })
+    .order("created_at", { ascending: false });
 
-  return data
-})
+  return data;
+});
 
-useCustomHead(computed(() => `${profile.value?.name}'s blog`))
+useCustomHead(computed(() => `${profile.value?.name}'s blog`));
 </script>
 
 <template>

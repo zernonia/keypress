@@ -1,16 +1,16 @@
 <script setup lang="ts">
-import { stripHtml } from "string-strip-html"
-import { format } from "date-fns"
-import { PropType } from "vue"
-import { Posts } from "~~/utils/types"
-import { constructUrl } from "~~/utils/functions"
+import { stripHtml } from "string-strip-html";
+import { format } from "date-fns";
+import { PropType } from "vue";
+import { Posts } from "~~/utils/types";
+import { constructUrl } from "~~/utils/functions";
 
 const props = defineProps({
   subdomain: Boolean,
   post: Object as PropType<Posts>,
-})
+});
 
-const url = computed(() => constructUrl(props.post, props.subdomain))
+const url = computed(() => constructUrl(props.post, props.subdomain));
 </script>
 
 <template>
@@ -23,6 +23,13 @@ const url = computed(() => constructUrl(props.post, props.subdomain))
           <div v-if="!subdomain" class="flex items-center space-x-2">
             <NuxtImg class="w-5 h-5 rounded-full" :src="post.profiles.avatar_url"></NuxtImg>
             <h4 class="text-sm font-medium">{{ post.profiles.name }}</h4>
+            <div
+              v-if="post.featured"
+              class="px-2 py-1 rounded-lg bg-light-300 text-gray-400 !ml-6 text-sm font-semibold flex items-center"
+            >
+              <div class="i-mdi-star mr-1"></div>
+              <span>Featured</span>
+            </div>
           </div>
 
           <h1 class="mt-2 font-semibold text-2xl">{{ post.title }}</h1>

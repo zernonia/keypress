@@ -1,23 +1,25 @@
 <script setup lang="ts">
-import type { Posts, Tags } from "~~/utils/types"
+import type { Posts, Tags } from "~~/utils/types";
 
-const client = useSupabaseClient()
+const client = useSupabaseClient();
 
 const { data, pending } = useAsyncData("posts", async () => {
   const { data } = await client
     .from<Posts>("posts")
     .select("*, profiles(avatar_url, name,username, domains (url, active))")
     .eq("active", true)
-    .order("created_at", { ascending: false })
-  return data
-})
+    .order("featured", { ascending: false })
+    .order("created_at", { ascending: false });
+
+  return data;
+});
 
 const { data: tags } = useAsyncData("tags", async () => {
-  const { data } = await client.from<Tags>("tags_view").select("*")
-  return data
-})
+  const { data } = await client.from<Tags>("tags_view").select("*");
+  return data;
+});
 
-useCustomHead("Explore all posts")
+useCustomHead("Explore all posts");
 </script>
 
 <template>

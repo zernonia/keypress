@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Posts } from "~~/utils/types"
+import { Posts } from "~~/utils/types";
 
-useCustomHead("Experience keyboard-first blogging platform")
+useCustomHead("Experience keyboard-first blogging platform");
 
-const client = useSupabaseClient()
+const client = useSupabaseClient();
 const { data, pending } = useAsyncData(
   "posts",
   async () => {
@@ -11,22 +11,24 @@ const { data, pending } = useAsyncData(
       .from<Posts>("posts")
       .select("*, profiles(avatar_url, name, username, domains (url, active) )")
       .eq("active", true)
-      .order("created_at", { ascending: false })
-    return data
-  },
-  { lazy: true }
-)
+      .order("featured", { ascending: false })
+      .order("created_at", { ascending: false });
 
-const writeEl = ref()
-const { Slash } = useMagicKeys()
+    return data;
+  },
+  { lazy: true, server: false }
+);
+
+const writeEl = ref();
+const { Slash } = useMagicKeys();
 watch(Slash, (n) => {
   if (n && writeEl.value) {
-    writeEl.value.$el.focus()
+    writeEl.value.$el.focus();
     setTimeout(() => {
-      writeEl.value.$el.click()
-    }, 300)
+      writeEl.value.$el.click();
+    }, 300);
   }
-})
+});
 </script>
 
 <template>
