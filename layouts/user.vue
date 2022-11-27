@@ -1,5 +1,6 @@
 <script lang="ts" setup>
-const user = useSupabaseUser()
+const user = useSupabaseUser();
+const url = useUrl();
 </script>
 
 <template>
@@ -12,7 +13,7 @@ const user = useSupabaseUser()
 
         <div class="flex items-center">
           <Command class="mr-4"></Command>
-          <NuxtLink rel="noopener" :to="`https://keypress.blog/login`" v-if="!user">Login</NuxtLink>
+          <NuxtLink rel="noopener" :to="`${url}/login`" v-if="!user">Login</NuxtLink>
           <div>
             <NuxtImg
               v-if="user?.user_metadata?.avatar_url"
