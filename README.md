@@ -49,7 +49,7 @@ If you are interested to implement the same, checkout
 - [UnoCss](https://uno.antfu.me/)
 - [Vercel - Hosting & Domain](https://vercel.com)
 
-## 🌎 Local Development
+## 🌎 Setup
 
 ### Prerequisites
 
@@ -74,6 +74,62 @@ Yarn
    ```sh
    yarn dev
    ```
+
+### Supabase Database
+
+```sql
+create table domains (
+  user_id uuid,
+  url text not null primary key,
+  active boolean,
+  created_at timestamp default now()
+);
+
+create table profiles (
+  id uuid default uuid_generate_v4() primary key,
+  username text,
+  avatar_url text,
+  name text,
+  created_at timestamp default now(),
+  subdomain text references domains (url)
+);
+
+create table posts (
+  id uuid default uuid_generate_v4() primary key,
+  author_id uuid references profiles (id),
+  created_at timestamp default now(),
+  slug text not null,
+  title text,
+  body text,
+  cover_img text,
+  active boolean,
+  tags ARRAY,
+  featured boolean not null
+);
+
+
+create or replace view tags_view as
+  select *, count(*)
+  from
+    (select unnest(tags) as name from posts where active is true) s
+  group by name;
+
+
+
+create or replace function public.handle_new_user()
+  returns trigger as $$
+  begin
+    insert into public.profiles (id, avatar_url, username, name)
+    values (new.id, new.raw_user_meta_data->>'avatar_url', new.raw_user_meta_data->>'user_name', new.raw_user_meta_data->>'preferred_username');
+    return new;
+  end;
+  $$ language plpgsql security definer;
+
+
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute procedure public.handle_new_user();
+```
 
 ## ➕ Contributing
 
