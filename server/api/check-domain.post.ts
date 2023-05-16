@@ -1,14 +1,14 @@
 //ref: https://github.com/vercel/platforms/blob/main/pages/api/domain/check.ts
-import { serverSupabaseClient } from "#supabase/server"
-import type { Domains } from "~~/utils/types"
+import { serverSupabaseClient } from "#supabase/server";
+import { Database } from "~~/utils/database.types";
 
 export default defineEventHandler(async (event) => {
   try {
-    const { domain, subdomain = false } = await useBody(event)
-    const client = serverSupabaseClient(event)
+    const { domain, subdomain = false } = await readBody(event);
+    const client = serverSupabaseClient<Database>(event);
 
     if (Array.isArray(domain))
-      return createError({ statusCode: 400, statusMessage: "Bad request. domain parameter cannot be an array." })
+      return createError({ statusCode: 400, statusMessage: "Bad request. domain parameter cannot be an array." });
 
     // if (subdomain) {
     //   const sub = (domain as string).replace(/[^a-zA-Z0-9/-]+/g, "");
@@ -28,21 +28,21 @@ export default defineEventHandler(async (event) => {
       headers: {
         Authorization: `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
       },
-    })) as any
-    console.log({ domain, data })
+    })) as any;
+    console.log({ domain, data });
 
-    const valid = data?.configuredBy ? true : false
+    const valid = data?.configuredBy ? true : false;
     if (valid) {
-      const { error: domainError } = await client.from<Domains>("domains").update({
+      const { error: domainError } = await client.from("domains").update({
         url: domain,
         active: true,
-      })
+      });
       if (domainError)
-        return createError({ statusCode: 400, statusMessage: "Bad request. domain parameter cannot be an array." })
+        return createError({ statusCode: 400, statusMessage: "Bad request. domain parameter cannot be an array." });
     }
 
-    return { valid }
+    return { valid };
   } catch (err) {
-    return createError({ statusCode: 404, statusMessage: err })
+    return createError({ statusCode: 404, statusMessage: err });
   }
-})
+});

@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import type { Posts } from "~~/utils/types";
-
-const client = useSupabaseClient();
+const client = useSupabase();
 const profile = useSubdomainProfile();
 
 const { data, pending } = useAsyncData("posts", async () => {
   const { data, error } = await client
-    .from<Posts>("posts")
+    .from("posts")
     .select("*, profiles!inner (username)")
     .eq("active", true)
     // @ts-ignore

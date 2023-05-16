@@ -1,34 +1,34 @@
 <script setup lang="ts">
 const props = defineProps({
   modelValue: String,
-})
-const emits = defineEmits(["update:modelValue"])
+});
+const emits = defineEmits(["update:modelValue"]);
 
-const client = useSupabaseClient()
-const user = useSupabaseUser()
-const { files, open: openFileDialog, reset } = useFileDialog({ accept: "image/*" })
+const client = useSupabase();
+const user = useSupabaseUser();
+const { files, open: openFileDialog, reset } = useFileDialog({ accept: "image/*" });
 
-const { base64 } = useBase64(computed(() => files.value?.item?.(0)))
-const imageSrc = ref(props.modelValue)
+const { base64 } = useBase64(computed(() => files.value?.item?.(0)));
+const imageSrc = ref(props.modelValue);
 
-const isUploading = ref(false)
+const isUploading = ref(false);
 const upload = async (file: File) => {
-  isUploading.value = true
-  const filename = `${user.value?.id}/${file.name}`
-  const { data, error } = await client.storage.from("posts").upload(filename, file, { cacheControl: "3600" })
+  isUploading.value = true;
+  const filename = `${user.value?.id}/${file.name}`;
+  const { data, error } = await client.storage.from("posts").upload(filename, file, { cacheControl: "3600" });
 
-  const { publicURL } = client.storage.from("posts").getPublicUrl(data?.Key?.replace("posts/", "") ?? filename)
-  emits("update:modelValue", publicURL)
-  isUploading.value = false
-}
+  const { publicURL } = client.storage.from("posts").getPublicUrl(data?.Key?.replace("posts/", "") ?? filename);
+  emits("update:modelValue", publicURL);
+  isUploading.value = false;
+};
 
 watch(files, async (n) => {
   if (n.length) {
-    const file = n.item(0)
-    upload(file)
+    const file = n.item(0);
+    upload(file);
   }
-})
-watch(base64, (n) => (imageSrc.value = n))
+});
+watch(base64, (n) => (imageSrc.value = n));
 </script>
 
 <template>

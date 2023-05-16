@@ -1,33 +1,33 @@
 <script lang="ts" setup>
-import { stripHtml } from "string-strip-html"
-import slugify from "slugify"
-import { Posts } from "~~/utils/types"
+import { stripHtml } from "string-strip-html";
+import slugify from "slugify";
+import { Posts } from "~~/utils/types";
 
-const user = useSupabaseUser()
-const client = useSupabaseClient()
+const user = useSupabaseUser();
+const client = useSupabase();
 
-const { params } = useRoute()
-const postId = ref(params.id)
+const { params } = useRoute();
+const postId = ref(params.id);
 
-const title = postId.value ? ref("") : useLocalStorage("new-post-title", "")
-const body = postId.value ? ref("") : useLocalStorage("new-post-body", "")
+const title = postId.value ? ref("") : useLocalStorage("new-post-title", "");
+const body = postId.value ? ref("") : useLocalStorage("new-post-body", "");
 const settings = ref({
   image: "",
   active: false,
   tags: [],
-})
+});
 
-const isSaving = ref(false)
-const isLoginVisible = ref(false)
+const isSaving = ref(false);
+const isLoginVisible = ref(false);
 const save = async () => {
-  if (!title.value || !stripHtml(body.value).result || isSaving.value) return
+  if (!title.value || !stripHtml(body.value).result || isSaving.value) return;
   if (!user.value?.id) {
     // login modal
-    isLoginVisible.value = true
-    return
+    isLoginVisible.value = true;
+    return;
   }
 
-  isSaving.value = true
+  isSaving.value = true;
   const { data, error } = await client
     .from<Posts>("posts")
     .upsert({
@@ -40,60 +40,60 @@ const save = async () => {
       cover_img: settings.value.image,
       tags: settings.value.tags,
     })
-    .single()
-  console.log({ data })
+    .single();
+  console.log({ data });
   if (data) {
     if (!postId.value) {
-      postId.value = data.id
+      postId.value = data.id;
       // history.pushState(null, "Title?", `${window.origin}/edit/${postId.value}`)
 
-      localStorage.removeItem("new-post-title")
-      localStorage.removeItem("new-post-body")
-      navigateTo(`/edit/${postId.value}`)
+      localStorage.removeItem("new-post-title");
+      localStorage.removeItem("new-post-body");
+      navigateTo(`/edit/${postId.value}`);
     }
   }
-  isSaving.value = false
-}
+  isSaving.value = false;
+};
 
 useMagicKeys({
   passive: false,
   onEventFired(e) {
     if ((e.ctrlKey || e.metaKey) && e.key === "s" && e.type === "keydown") {
-      e.preventDefault()
-      save()
+      e.preventDefault();
+      save();
     }
 
     if ((e.ctrlKey || e.metaKey) && e.key === "e" && e.type === "keydown") {
-      isDrawerOpen.value = !isDrawerOpen.value
+      isDrawerOpen.value = !isDrawerOpen.value;
     }
   },
-})
+});
 
 const { pending } = await useAsyncData(
   `post-${postId.value}`,
   async () => {
-    if (!postId.value) throw Error("no id found")
-    const { data } = await client.from<Posts>("posts").select("*").eq("id", postId.value).single()
-    title.value = data.title
-    body.value = data.body
+    if (!postId.value) throw Error("no id found");
+    const { data } = await client.from<Posts>("posts").select("*").eq("id", postId.value).single();
+    title.value = data.title;
+    body.value = data.body;
     settings.value = {
       image: data.cover_img ?? "",
       active: data.active ?? false,
       tags: data.tags ?? [],
-    }
+    };
 
-    return data
+    return data;
   },
   { server: false, lazy: true }
-)
+);
 
-const isDrawerOpen = ref(false)
+const isDrawerOpen = ref(false);
 
-useCustomHead("Write your post")
+useCustomHead("Write your post");
 definePageMeta({
   alias: "/write",
   middleware: "auth",
-})
+});
 </script>
 
 <template>

@@ -1,14 +1,13 @@
-<script setup lang="ts">
-import { Posts } from "~~/utils/types";
+<script setup lang="ts"> 
 
 useCustomHead("Experience keyboard-first blogging platform");
 
-const client = useSupabaseClient();
+const client = useSupabase();
 const { data, pending } = useAsyncData(
   "posts",
   async () => {
     const { data } = await client
-      .from<Posts>("posts")
+      .from("posts")
       .select("*, profiles(avatar_url, name, username, domains (url, active) )")
       .eq("active", true)
       .order("featured", { ascending: false })

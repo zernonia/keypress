@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import { format } from "date-fns"
-import { Posts } from "~~/utils/types"
-import { stripHtml } from "string-strip-html"
-import { constructUrl } from "~~/utils/functions"
+import { format } from "date-fns";
+import type { Posts } from "~~/utils/types";
+import { stripHtml } from "string-strip-html";
+import { constructUrl } from "~~/utils/functions";
 
-const client = useSupabaseClient()
-const { params } = useRoute()
-const url = useUrl()
+const client = useSupabase();
+const { params } = useRoute();
+const url = useUrl();
 
 const { data, pending } = useAsyncData(`posts-${params.slug}`, async () => {
   const { data } = await client
-    .from<Posts>("posts")
+    .from("posts")
     .select("*, profiles(avatar_url, name, username)")
     .eq("slug", params.slug)
-    .single()
-  return data
-})
+    .single();
+  return data;
+});
 
 useCustomHead(
   computed(() => data.value?.title),
   computed(() => (data.value?.body ? stripHtml(data.value?.body)?.result?.slice(0, 160) : undefined)),
   computed(() => (data.value?.cover_img === "" ? `${url}/og/${params.slug}` : data.value?.cover_img))
-)
+);
 
-const fullUrl = computed(() => constructUrl(data.value, false))
+const fullUrl = computed(() => constructUrl(data.value as Posts, false));
 </script>
 
 <template>

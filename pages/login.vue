@@ -1,11 +1,14 @@
 <script lang="ts" setup>
-const client = useSupabaseClient()
+const client = useSupabase();
 
 const signIn = async () => {
-  const { user } = await client.auth.signIn({ provider: "github" })
-}
+  const { error } = await client.auth.signInWithOAuth({ provider: "github" });
+  if (error) {
+    return alert("Something went wrong !");
+  }
+};
 
-useCustomHead("Login")
+useCustomHead("Login");
 </script>
 
 <template>

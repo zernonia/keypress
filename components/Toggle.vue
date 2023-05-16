@@ -2,13 +2,13 @@
 const props = defineProps({
   modelValue: Boolean,
   id: String,
-})
-const emits = defineEmits(["update:modelValue"])
+});
+const emits = defineEmits(["update:modelValue"]);
 
 const emitData = (ev: InputEvent) => {
   //@ts-ignore
-  emits("update:modelValue", ev.target.checked)
-}
+  emits("update:modelValue", ev.target.checked);
+};
 </script>
 
 <template>
@@ -16,7 +16,7 @@ const emitData = (ev: InputEvent) => {
     <input
       type="checkbox"
       class="peer h-1px w-1px absolute border-0 outline-none"
-      v-model="modelValue"
+      :value="modelValue"
       :id="id"
       @change="emitData"
     />

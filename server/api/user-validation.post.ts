@@ -1,6 +1,6 @@
 export default defineEventHandler(async (event) => {
-  const { access_token } = await useBody(event)
-  const hostname = event.req.headers.host
+  const { access_token } = await readBody(event);
+  const hostname = event.req.headers.host;
 
   // validate this token
   // setCookie(event, "sb-access-token", access_token, {
@@ -8,5 +8,5 @@ export default defineEventHandler(async (event) => {
   //   path: "/",
   //   sameSite: "lax",
   // })
-  return "auth cookie set"
-})
+  return "auth cookie set";
+});

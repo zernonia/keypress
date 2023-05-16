@@ -1,25 +1,24 @@
 <script setup lang="ts">
-import type { Tags } from "~~/utils/types"
-import { PropType } from "vue"
-import Multiselect from "@vueform/multiselect"
+import { PropType } from "vue";
+import Multiselect from "@vueform/multiselect";
 
 const props = defineProps({
   modelValue: { type: Object as PropType<string[]>, default: [] },
   id: String,
-})
-const emits = defineEmits(["update:modelValue"])
+});
+const emits = defineEmits(["update:modelValue"]);
 
-const client = useSupabaseClient()
+const client = useSupabase();
 const { data: tags } = useAsyncData("tags", async () => {
-  const { data } = await client.from<Tags>("tags_view").select("*")
-  return data.map((i) => i.name)
-})
+  const { data } = await client.from("tags_view").select("*");
+  return data?.map((i) => i.name);
+});
 </script>
 
 <template>
   <div>
     <Multiselect
-      v-model="modelValue"
+      :modelValue="modelValue"
       @change="emits('update:modelValue', $event)"
       :options="tags ?? []"
       createOption

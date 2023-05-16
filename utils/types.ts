@@ -1,38 +1,17 @@
-// generated from https://supabase-schema.vercel.app/
-export interface Profiles {
-  id: string /* primary key */;
-  username?: string;
-  avatar_url?: string;
-  name?: string;
-  created_at?: string;
-  subdomain?: string;
+import type { Database }from "./database.types"
+ 
+
+export type Profiles = Database["public"]["Tables"]["profiles"]["Row"] & {
   domains: Domains;
   posts: Posts[];
 }
 
-export interface Domains {
-  user_id?: string /* foreign key to profiles.id */;
-  url: string /* primary key */;
-  active?: boolean;
-  created_at?: string;
+export type Domains = Database["public"]["Tables"]["domains"]["Row"] &  {
   profiles?: Profiles;
 }
 
-export interface Posts {
-  id: string /* primary key */;
-  author_id?: string /* foreign key to profiles.id */;
-  created_at?: string;
-  slug?: string;
-  title?: string;
-  body?: string;
-  cover_img?: string;
-  active?: boolean;
-  tags?: string[];
-  profiles?: Profiles;
-  featured?: boolean;
+export type Posts = Database["public"]["Tables"]["posts"]["Row"] & { 
+  profiles: Profiles 
 }
 
-export interface Tags {
-  name: string;
-  count: number;
-}
+export type Tags = Database["public"]["Views"]["tags_view"] 

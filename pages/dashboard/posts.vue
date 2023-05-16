@@ -6,7 +6,7 @@ const profile = useProfile()
 
 <template>
   <div class="w-full">
-    <ul>
+    <ul v-if="profile">
       <li v-for="post in profile.posts" class="my-4">
         <NuxtLink :to="`/edit/${post.id}`" class="block">
           <div class="p-4 rounded-2xl bg-white shadow-none focus:shadow-lg hover:shadow-lg transition">

@@ -1,10 +1,10 @@
-import { Posts } from "./types"
+import type { Posts } from "./types";
 
-export const constructUrl = (post: Posts, subdomain = false) => {
-  if (subdomain) return `/${post.slug}`
-  if (process.dev) return `http://${post?.profiles?.username}.localhost:3000/${post.slug}`
+export const constructUrl = (post: Posts | null | undefined, subdomain = false) => {
+  if (subdomain) return `/${post?.slug}`;
+  if (process.dev) return `http://${post?.profiles?.username}.localhost:3000/${post.slug}`;
   else {
-    if (post?.profiles?.domains?.active) return `https://${post.profiles.domains.url}/${post.slug}`
-    else return `https://${post?.profiles?.username}.keypress.blog/${post.slug}`
+    if (post?.profiles?.domains?.active) return `https://${post.profiles.domains.url}/${post.slug}`;
+    else return `https://${post?.profiles?.username}.keypress.blog/${post.slug}`;
   }
-}
+};

@@ -2,7 +2,7 @@ import transformerDirective from "@unocss/transformer-directives"
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-  modules: ["@unocss/nuxt", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxt/image-edge", "~~/modules/og"],
+  modules: ["@unocss/nuxt", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxt/image-edge", "~~/modules/og", "@nuxt/devtools"],
   css: ["@unocss/reset/tailwind.css", "~~/assets/main.css"],
   runtimeConfig: {
     public: {

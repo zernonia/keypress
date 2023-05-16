@@ -1,24 +1,24 @@
-import { readFileSync } from "fs"
-import { join, resolve } from "path"
-import { serverSupabaseClient } from "#supabase/server"
-import { useUrl } from "~~/composables/url"
-import { Resvg, ResvgRenderOptions } from "@resvg/resvg-js"
-import type { Posts } from "~~/utils/types"
-import satori from "satori"
+import { readFileSync } from "fs";
+import { join, resolve } from "path";
+import { serverSupabaseClient } from "#supabase/server";
+import { useUrl } from "~~/composables/url";
+import { Resvg, ResvgRenderOptions } from "@resvg/resvg-js";
+import satori from "satori";
+import { Database } from "~~/utils/database.types";
 
 export default defineEventHandler(async (event) => {
-  const client = serverSupabaseClient(event)
-  const url = useUrl()
-  const slug = event.context.params.slug
-  const fonts = ["arial.ttf", "arial_bold.ttf"]
+  const client = serverSupabaseClient<Database>(event);
+  const url = useUrl();
+  const slug = event.context.params?.slug;
+  const fonts = ["arial.ttf", "arial_bold.ttf"];
 
   try {
     const { data, error } = await client
-      .from<Posts>("posts")
+      .from("posts")
       .select("title, profiles(name, avatar_url)")
       .eq("slug", slug)
-      .single()
-    if (error) throw Error(error.message)
+      .single();
+    if (error) throw Error(error.message);
 
     // svg inspired from https://og-playground.vercel.app/
     const svg = await satori(
@@ -127,7 +127,7 @@ export default defineEventHandler(async (event) => {
           },
         ],
       }
-    )
+    );
 
     // render to svg as image
 
@@ -140,32 +140,32 @@ export default defineEventHandler(async (event) => {
         fontFiles: fonts.map((i) => join(resolve("."), "public/fonts", i)), // Load custom fonts.
         loadSystemFonts: false,
       },
-    })
+    });
 
     const resolved = await Promise.all(
       resvg.imagesToResolve().map(async (url) => {
-        console.info("image url", url)
-        const img = await fetch(url)
-        const buffer = await img.arrayBuffer()
+        console.info("image url", url);
+        const img = await fetch(url);
+        const buffer = await img.arrayBuffer();
         return {
           url,
           buffer: Buffer.from(buffer),
-        }
+        };
       })
-    )
+    );
     if (resolved.length > 0) {
       for (const result of resolved) {
-        const { url, buffer } = result
-        resvg.resolveImage(url, buffer)
+        const { url, buffer } = result;
+        resvg.resolveImage(url, buffer);
       }
     }
 
-    const renderData = resvg.render()
-    const pngBuffer = renderData.asPng()
+    const renderData = resvg.render();
+    const pngBuffer = renderData.asPng();
 
-    event.res.setHeader("Cache-Control", "s-maxage=7200, stale-while-revalidate")
-    return pngBuffer
+    event.res.setHeader("Cache-Control", "s-maxage=7200, stale-while-revalidate");
+    return pngBuffer;
   } catch (err) {
-    return createError({ statusCode: 500, statusMessage: err })
+    return createError({ statusCode: 500, statusMessage: err });
   }
-})
+});

@@ -1,28 +1,29 @@
 <script lang="ts" setup>
-import { useFuse } from "@vueuse/integrations/useFuse"
+import { useFuse } from "@vueuse/integrations/useFuse";
 
-const router = useRouter()
-const user = useSupabaseUser()
-const subdomain = useSubdomain()
-const url = useUrl()
+const router = useRouter();
+const user = useSupabaseUser();
+const subdomain = useSubdomain();
+const url = useUrl();
 
-const keys = useMagicKeys()
-const CmdK = keys["Meta+K"]
-const Escape = keys["Escape"]
-const isVisible = useState("command-visible", () => false)
+const keys = useMagicKeys();
+const CmdK = keys["Meta+K"];
+const Escape = keys["Escape"];
+const isVisible = useState("command-visible", () => false);
 
 watch(CmdK, (v) => {
   if (v) {
-    isVisible.value = !isVisible.value
+    isVisible.value = !isVisible.value;
   }
-})
-watch(Escape, () => (isVisible.value = false))
+});
+watch(Escape, () => (isVisible.value = false));
 
 const navAction = (path: string) => {
-  router.push(path)
-  isVisible.value = false
-  searchTerm.value = ""
-}
+  router.push(path);
+  isVisible.value = false;
+  searchTerm.value = "";
+};
+
 const navList = computed(() =>
   subdomain.value
     ? [
@@ -59,9 +60,9 @@ const navList = computed(() =>
         { label: "Login", value: "login", action: () => navAction("/login"), show: !user.value?.id },
         { label: "Dashboard", value: "dashboard", action: () => navAction("/dashboard/posts"), show: user.value?.id },
       ]
-)
+);
 
-const searchTerm = ref("")
+const searchTerm = ref("");
 const { results } = useFuse(
   searchTerm,
   navList.value.filter((i) => i.show),
@@ -71,7 +72,7 @@ const { results } = useFuse(
     },
     matchAllWhenSearchEmpty: true,
   }
-)
+);
 </script>
 
 <template>

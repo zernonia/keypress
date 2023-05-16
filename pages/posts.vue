@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import type { Posts, Tags } from "~~/utils/types";
-
-const client = useSupabaseClient();
+const client = useSupabase();
 
 const { data, pending } = useAsyncData("posts", async () => {
   const { data } = await client
-    .from<Posts>("posts")
+    .from("posts")
     .select("*, profiles(avatar_url, name,username, domains (url, active))")
     .eq("active", true)
     .order("featured", { ascending: false })
@@ -15,7 +13,7 @@ const { data, pending } = useAsyncData("posts", async () => {
 });
 
 const { data: tags } = useAsyncData("tags", async () => {
-  const { data } = await client.from<Tags>("tags_view").select("*");
+  const { data } = await client.from("tags_view").select("*");
   return data;
 });
 

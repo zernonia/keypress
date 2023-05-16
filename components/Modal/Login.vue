@@ -1,14 +1,14 @@
 <script setup lang="ts">
-const client = useSupabaseClient()
+const client = useSupabase();
 
 defineProps({
   show: Boolean,
-})
-const emits = defineEmits(["update:show"])
+});
+const emits = defineEmits(["update:show"]);
 
 const signIn = async () => {
-  const { user } = await client.auth.signIn({ provider: "github" })
-}
+  const { user } = await client.auth.signIn({ provider: "github" });
+};
 </script>
 
 <template>

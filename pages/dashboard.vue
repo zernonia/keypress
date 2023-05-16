@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Profiles } from "~~/utils/types"
+import { Profiles } from "~~/utils/types";
 
-const user = useSupabaseUser()
-const client = useSupabaseClient()
-const profile = useProfile()
+const user = useSupabaseUser();
+const client = useSupabase();
+const profile = useProfile();
 
 const { pending } = useAsyncData(
   "profile",
@@ -13,19 +13,19 @@ const { pending } = useAsyncData(
       .select("*, domains(url, active), posts(id, title, created_at)")
       .order("created_at", { ascending: false, foreignTable: "posts" })
       .eq("id", user.value?.id)
-      .maybeSingle()
+      .maybeSingle();
 
-    profile.value = data
-    return data
+    profile.value = data;
+    return data;
   },
   { server: false }
-)
+);
 
-useCustomHead("Dashboard")
+useCustomHead("Dashboard");
 
 definePageMeta({
   middleware: "auth",
-})
+});
 </script>
 
 <template>
