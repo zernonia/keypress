@@ -2,7 +2,7 @@ export default defineNuxtPlugin(() => {
   const cfg = useRuntimeConfig()
 
   const moduleOptions = {
-    scriptUrl: "https://umami-zernonia.vercel.app/umami.js",
+    scriptUrl: "https://umami-zernonia.vercel.app/script.js",
     websiteId: cfg.public.UMAMI_WEBSITE_ID,
   }
   const options = { ...moduleOptions }
@@ -18,7 +18,8 @@ function loadScript(options: any) {
 
   script.async = true
   script.defer = true
-  script.dataset.websiteId = options.websiteId
+  script.setAttribute('data-website-id', options.websiteId);
+
   script.src = options.scriptUrl
 
   head.appendChild(script)

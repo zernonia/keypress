@@ -3603,11 +3603,6 @@ minizlib@^2.1.1:
     minipass "^3.0.0"
     yallist "^4.0.0"
 
-mitt@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/mitt/-/mitt-3.0.0.tgz#69ef9bd5c80ff6f57473e8d89326d01c414be0bd"
-  integrity sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==
-
 mkdirp-classic@^0.5.2, mkdirp-classic@^0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/mkdirp-classic/-/mkdirp-classic-0.5.3.tgz#fa10c9115cc6d8865be221ba47ee9bed78601113"
@@ -5483,15 +5478,6 @@ vue-bundle-renderer@^0.4.3:
   integrity sha512-l4mqMiMSF3wO7h4y9hrdVA97XftD457C+sbbECpZhqjzXf0MzYhdxXJc9JbMjO7fIez1M5s5wFd1YN/d1Em7sg==
   dependencies:
     ufo "^0.8.3"
-
-vue-command-palette@^0.1.3:
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/vue-command-palette/-/vue-command-palette-0.1.3.tgz#1d5fc35d8b9f3e2de0df3b5dce6afe17d9ed9fed"
-  integrity sha512-EHdPPKcEX++qY7k9b/gcY9z9xrAzginvaTOlmJ59xYypaeeJE48Uhex8te5hpQQu3Lnf0SQV71P4DXP08Du1Sg==
-  dependencies:
-    fuse.js "^6.6.2"
-    mitt "^3.0.0"
-    nanoid "^4.0.0"
 
 vue-demi@*:
   version "0.13.11"
